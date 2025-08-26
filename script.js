@@ -383,11 +383,10 @@ document.getElementById('downloadCV').addEventListener('click', function(e) {
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
 
-    if (!name || !email || !message) {
+    if (!email || !message) {
         showFormMessage('Harap isi semua field yang diperlukan.', 'error');
         return;
     }
@@ -420,11 +419,17 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
                 showFormMessage('Pesan berhasil dikirim! Saya akan membalasnya secepatnya.', 'success');
                 document.getElementById('contactForm').reset();
             } else {
-                throw new Error('Network response was not ok.');
+                response.json().then(data => {
+                    if (data.errors) {
+                        showFormMessage(data.errors.map(error => error.message).join(', '), 'error');
+                    } else {
+                        showFormMessage('Terjadi kesalahan saat mengirim pesan.', 'error');
+                    }
+                });
             }
         })
         .catch(error => {
-            showFormMessage('Terjadi kesalahan. Silakan coba lagi atau hubungi saya langsung di fawwazayq@gmail.com', 'error');
+            showFormMessage('Terjadi kesalahan jaringan. Silakan coba lagi atau hubungi saya langsung di fawwazayq@gmail.com', 'error');
         })
         .finally(() => {
             // Reset button state
