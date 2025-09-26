@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Artikel - Fawwaz AYQ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="Logo.png" type="image/x-icon">
+    <style>
+        .article-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--text-secondary);
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .article-content {
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+        
+        .article-content p {
+            margin-bottom: 20px;
+        }
+        
+        .article-tags {
+            margin: 20px 0;
+        }
+        
+        .article-tags span {
+            display: inline-block;
+            background: rgba(100, 255, 218, 0.2);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .back-btn {
+            background: var(--accent-color);
+            color: var(--bg-color); /* Use background color for proper contrast */
+            border: none;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            background: #52d9b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+            color: var(--bg-color); /* Use background color for proper contrast */
+            text-decoration: none;
+        }
+        
+        .reading-time {
+            display: inline-block;
+            background: var(--card-bg);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+        
+        .article-link {
+            color: var(--text-color); /* Use CSS variable for proper light/dark mode support */
+        }
+        
+        .article-link:hover {
+            color: var(--accent-color);
+            text-decoration: none;
+            background-color: var(--card-bg);
+        }
+        
+        a {
+            color: var(--accent-color); /* Use accent color for better visibility in both modes */
+        }
+        
+        a:hover {
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    <div class="parallax-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Fawwaz AYQ</a>
+            <div class="d-flex align-items-center">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#profile">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">Kemampuan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#experience">Proyek</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="stories.html">Cerita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="articles.html">Artikel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5 mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <a href="articles.html" class="back-btn mt-3 glowing-border">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Artikel
+                </a>
+                
+                <div class="main-content mt-4 glowing-border">
+                    <div class="article-header">
+                        <h1 class="section-title">Evolusi Dunia Konten Kreatif di Era Digital</h1>
+                        <div class="article-meta">
+                            <span><i class="fas fa-calendar-alt"></i> 20 Agustus 2025</span>
+                            <span><i class="fas fa-user"></i> Fawwaz AYQ</span>
+                        </div>
+                        <div class="reading-time">
+                            <i class="fas fa-clock"></i> 7-11 menit membaca
+                        </div>
+                    </div>
+                    
+                    <div class="article-content">
+                        <p>Dunia konten kreatif telah mengalami transformasi luar biasa sejak munculnya platform digital dan media sosial. Content creator kini menjadi profesi yang diakui secara global, dengan jutaan orang yang membangun karier dan bisnis melalui platform seperti YouTube, TikTok, dan Instagram.</p>
+                        
+                        <p>Perkembangan teknologi editing video, algoritma platform digital, dan perubahan pola konsumsi media telah membentuk cara baru dalam mencipta dan menyebarluaskan konten. Ini menciptakan peluang dan tantangan baru bagi para kreator dalam membangun audiens dan menghasilkan pendapatan dari karya mereka. Kualitas konten, konsistensi, dan pemahaman terhadap algoritma platform menjadi kunci kesuksesan dalam dunia ini.</p>
+                        
+                        <h3>Perkembangan Teknologi dalam Pembuatan Konten</h3>
+                        <p>Perkembangan teknologi telah membuat pembuatan konten menjadi lebih mudah dan terjangkau. Dulu, membuat video berkualitas tinggi membutuhkan peralatan mahal dan studio profesional. Kini, kreator dapat membuat konten menarik hanya dengan smartphone dan aplikasi editing sederhana.</p>
+                        
+                        <p>Perangkat lunak editing video modern menawarkan fitur-fitur canggih yang sebelumnya hanya tersedia di peralatan profesional. Ini memberdayakan lebih banyak orang untuk menjadi content creator dan menyebarkan ide-ide kreatif mereka ke seluruh dunia.</p>
+                        
+                        <h3>Algoritma dan Distribusi Konten</h3>
+                        <p>Algoritma platform digital memainkan peran penting dalam bagaimana konten ditampilkan kepada pengguna. Memahami bagaimana algoritma bekerja menjadi keterampilan penting bagi content creator untuk memaksimalkan jangkauan dan interaksi audiens.</p>
+                        
+                        <p>Platform seperti YouTube, Instagram, dan TikTok terus memperbarui algoritma mereka untuk memberikan pengalaman terbaik kepada pengguna. Ini berarti bahwa content creator harus terus belajar dan beradaptasi dengan perubahan-perubahan ini untuk tetap relevan dan terlihat oleh audiens mereka.</p>
+                        
+                        <h3>Kesempatan dan Tantangan</h3>
+                        <p>Dunia konten kreatif menawarkan banyak kesempatan tetapi juga membawa tantangan unik. Di satu sisi, kreator dapat membangun komunitas besar, menghasilkan pendapatan, dan mengekspresikan kreativitas mereka secara bebas. Namun, di sisi lain, kreator juga menghadapi tekanan untuk tetap konsisten dalam produksi konten, menghadapi kritik publik, dan bersaing dalam pasar yang semakin jenuh.</p>
+                        
+                        <p>Meskipun demikian, dunia konten kreatif terus berkembang dan menawarkan peluang baru bagi mereka yang siap untuk berinovasi dan terus belajar.</p>
+                        
+                        <h3>Masa Depan Content Creator</h3>
+                        <p>Masa depan content creator sangat menjanjikan seiring dengan terus berkembangnya teknologi dan perubahan pola konsumsi media. Virtual reality, augmented reality, dan teknologi interaktif lainnya akan membuka peluang baru dalam menciptakan pengalaman konten yang lebih imersif dan menarik.</p>
+                        
+                        <p>Evolusi dunia ini akan terus mengubah bagaimana kita mengonsumsi dan berinteraksi dengan konten kreatif, memberikan lebih banyak alat dan saluran bagi para kreator untuk mengekspresikan ide-ide mereka.</p>
+                    </div>
+                    
+                    <div class="article-tags">
+                        <span>Content Creator</span>
+                        <span>Konten Kreatif</span>
+                        <span>Era Digital</span>
+                        <span>Teknologi</span>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h4>Baca Juga:</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="article1.html" class="article-link d-block p-3 border rounded">
+                                    <h5><i class="fas fa-arrow-right me-2"></i>Tantangan dalam Pengembangan Game Console Modern</h5>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="articles.html" class="article-link d-block p-3 border rounded">
+                                    <h5><i class="fas fa-arrow-right me-2"></i>Semua Artikel</h5>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <a href="article2.html" class="article-link d-block p-3 border rounded">
+                                    <h5><i class="fas fa-arrow-right me-2"></i>Peran C# dalam Transformasi Digital Dunia Game</h5>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="article3.html" class="article-link d-block p-3 border rounded">
+                                    <h5><i class="fas fa-arrow-right me-2"></i>Masa Depan Pengembangan Web: Tren dan Teknologi Terbaru</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center">
+        <p class="mb-0">©2025 Fawwaz Anggita Yumna Qotrunnada. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="script.js"></script>
+    
+    
+    </body>
+</html>
