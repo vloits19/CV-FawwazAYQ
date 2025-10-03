@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikel - Fawwaz AYQ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="Logo.png" type="image/x-icon">
+    <style>
+        .article-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .article-card .card-body {
+            padding: 25px;
+        }
+        
+        .article-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 3rem;
+            opacity: 0.1;
+            color: var(--accent-color);
+            z-index: 1;
+        }
+        
+        .article-card .card-body {
+            padding-left: 80px; /* Make space for the icon on the left */
+        }
+        
+        .article-btn {
+            background: var(--accent-color);
+            color: var(--primary-color); /* Use CSS variable for better light/dark mode support */
+            border: none;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .article-btn:hover {
+            background: #52d9b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+            color: var(--primary-color); /* Use CSS variable for better light/dark mode support */
+            text-decoration: none;
+        }
+        
+        .reading-time {
+            display: inline-block;
+            background: var(--card-bg);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+        
+        .article-cover {
+            height: 200px;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .article-cover i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .article-cover span {
+            margin-top: 5px;
+        }
+        
+        .article-intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .article-intro h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .article-intro h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        .article-intro p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: var(--text-secondary);
+        }
+        
+        .article-content {
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .article-tags {
+            margin: 15px 0;
+        }
+        
+        .article-tags span {
+            display: inline-block;
+            background: rgba(100, 255, 218, 0.2);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    <div class="parallax-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Fawwaz AYQ</a>
+            <div class="d-flex align-items-center">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#profile">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">Kemampuan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#experience">Proyek</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="stories.html">Cerita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="articles.html">Artikel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5 mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="article-intro" style="margin-top: 1.5rem;">
+                    <h2 class="section-title">Artikel Terbaru</h2>
+                    <p>Temukan pemikiran, ide, dan wawasan terbaru melalui artikel-artikel yang saya tulis. Setiap artikel menyajikan perspektif dan pengetahuan yang dapat menginspirasi dan memberikan pemahaman baru.</p>
+                </div>
+                
+                <div class="row">
+                    <!-- Article 1 -->
+                    <div class="col-md-12 mb-4">
+                        <div class="article-card main-content glowing-border">
+                            <div class="article-cover glowing-border">
+                                <i class="fas fa-gamepad"></i>
+                                <span>Tantangan dalam Pengembangan Game Console Modern</span>
+                            </div>
+                            <i class="fas fa-newspaper article-icon"></i>
+                            <div class="card-body">
+                                <h3 class="card-title">Tantangan dalam Pengembangan Game Console Modern</h3>
+                                <div class="article-meta">
+                                    <span><i class="fas fa-calendar-alt"></i> 15 September 2025</span>
+                                    <span><i class="fas fa-user"></i> Fawwaz AYQ</span>
+                                </div>
+                                <div class="article-content">
+                                    <p>Pengembangan game untuk konsol modern menawarkan tantangan unik yang berbeda dari pengembangan game untuk platform lain. Pembatasan hardware, kebutuhan untuk optimisasi yang ketat, dan persyaratan teknis dari masing-masing platform memerlukan pendekatan yang sangat hati-hati dalam perencanaan dan eksekusi.</p>
+                                    <p>Salah satu aspek penting dalam pengembangan game console adalah efisiensi penggunaan memori dan daya pemrosesan. Berbeda dengan game PC yang memiliki konfigurasi bervariasi, konsol menawarkan lingkungan yang terdefinisi dengan jelas tetapi juga lebih ketat dalam keterbatasan sumber daya. Ini membutuhkan kemampuan untuk menulis kode yang sangat efisien dan memahami arsitektur perangkat keras secara mendalam.</p>
+                                </div>
+                                <div class="article-tags">
+                                    <span>Game Development</span>
+                                    <span>Console</span>
+                                    <span>Optimasi</span>
+                                </div>
+                                <div class="reading-time">
+                                    <i class="fas fa-clock"></i> 8-12 menit membaca
+                                </div>
+                                <a href="article1.html" class="btn article-btn mt-3 glowing-border">
+                                    <i class="fas fa-book-open"></i> Baca Artikel
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Article 2 -->
+                    <div class="col-md-12 mb-4">
+                        <div class="article-card main-content glowing-border">
+                            <div class="article-cover glowing-border" style="background: linear-gradient(135deg, #6a11cb, #2575fc);">
+                                <i class="fas fa-code"></i>
+                                <span>Peran C# dalam Transformasi Digital Dunia Game</span>
+                            </div>
+                            <i class="fas fa-newspaper article-icon"></i>
+                            <div class="card-body">
+                                <h3 class="card-title">Peran C# dalam Transformasi Digital Dunia Game</h3>
+                                <div class="article-meta">
+                                    <span><i class="fas fa-calendar-alt"></i> 8 September 2025</span>
+                                    <span><i class="fas fa-user"></i> Fawwaz AYQ</span>
+                                </div>
+                                <div class="article-content">
+                                    <p>C# telah menjadi salah satu bahasa pemrograman paling populer dalam industri pengembangan game, terutama karena digunakan secara luas dalam platform Unity. Bahasa ini menawarkan kemudahan penggunaan dan fitur-fitur canggih yang memungkinkan pengembang untuk menciptakan pengalaman interaktif yang kompleks.</p>
+                                    <p>Keunggulan C# dalam pengembangan game termasuk dukungan kuat terhadap pemrograman berorientasi objek, sistem manajemen memori otomatis, dan integrasi yang mulus dengan berbagai middleware dan engine game. Selain itu, C# menawarkan kemampuan untuk mengelola sumber daya secara efisien dan menyediakan alat debugging yang kuat, yang sangat penting dalam proses pengembangan game.</p>
+                                </div>
+                                <div class="article-tags">
+                                    <span>Pemrograman</span>
+                                    <span>C#</span>
+                                    <span>Dunia Game</span>
+                                </div>
+                                <div class="reading-time">
+                                    <i class="fas fa-clock"></i> 6-10 menit membaca
+                                </div>
+                                <a href="article2.html" class="btn article-btn mt-3 glowing-border">
+                                    <i class="fas fa-book-open"></i> Baca Artikel
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Article 3 -->
+                    <div class="col-md-12 mb-4">
+                        <div class="article-card main-content glowing-border">
+                            <div class="article-cover glowing-border" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+                                <i class="fas fa-laptop-code"></i>
+                                <span>Masa Depan Pengembangan Web: Tren dan Teknologi Terbaru</span>
+                            </div>
+                            <i class="fas fa-newspaper article-icon"></i>
+                            <div class="card-body">
+                                <h3 class="card-title">Masa Depan Pengembangan Web: Tren dan Teknologi Terbaru</h3>
+                                <div class="article-meta">
+                                    <span><i class="fas fa-calendar-alt"></i> 1 September 2025</span>
+                                    <span><i class="fas fa-user"></i> Fawwaz AYQ</span>
+                                </div>
+                                <div class="article-content">
+                                    <p>Dunia pengembangan web terus berkembang dengan cepat, dengan teknologi dan framework baru yang muncul secara teratur. Masa depan pengembangan web akan dipengaruhi oleh berbagai faktor termasuk kemajuan teknologi, perubahan perilaku pengguna, dan kebutuhan bisnis yang dinamis.</p>
+                                    <p>Beberapa tren utama yang akan membentuk masa depan pengembangan web termasuk Progressive Web Apps (PWA), penggunaan API headless, arsitektur Jamstack, dan penerapan kecerdasan buatan dalam pengalaman pengguna. Selain itu, fokus pada kecepatan, keamanan, dan aksesibilitas akan terus menjadi prioritas utama dalam setiap proyek pengembangan web.</p>
+                                </div>
+                                <div class="article-tags">
+                                    <span>Web Development</span>
+                                    <span>Tren Teknologi</span>
+                                    <span>Masa Depan Web</span>
+                                </div>
+                                <div class="reading-time">
+                                    <i class="fas fa-clock"></i> 10-15 menit membaca
+                                </div>
+                                <a href="article3.html" class="btn article-btn mt-3 glowing-border">
+                                    <i class="fas fa-book-open"></i> Baca Artikel
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Article 4 -->
+                    <div class="col-md-12 mb-4">
+                        <div class="article-card main-content glowing-border">
+                            <div class="article-cover glowing-border" style="background: linear-gradient(135deg, #ff416c, #ff4b2b);">
+                                <i class="fas fa-file-video"></i>
+                                <span>Evolusi Dunia Konten Kreatif di Era Digital</span>
+                            </div>
+                            <i class="fas fa-newspaper article-icon"></i>
+                            <div class="card-body">
+                                <h3 class="card-title">Evolusi Dunia Konten Kreatif di Era Digital</h3>
+                                <div class="article-meta">
+                                    <span><i class="fas fa-calendar-alt"></i> 20 Agustus 2025</span>
+                                    <span><i class="fas fa-user"></i> Fawwaz AYQ</span>
+                                </div>
+                                <div class="article-content">
+                                    <p>Dunia konten kreatif telah mengalami transformasi luar biasa sejak munculnya platform digital dan media sosial. Content creator kini menjadi profesi yang diakui secara global, dengan jutaan orang yang membangun karier dan bisnis melalui platform seperti YouTube, TikTok, dan Instagram.</p>
+                                    <p>Perkembangan teknologi editing video, algoritma platform digital, dan perubahan pola konsumsi media telah membentuk cara baru dalam mencipta dan menyebarluaskan konten. Ini menciptakan peluang dan tantangan baru bagi para kreator dalam membangun audiens dan menghasilkan pendapatan dari karya mereka. Kualitas konten, konsistensi, dan pemahaman terhadap algoritma platform menjadi kunci kesuksesan dalam dunia ini.</p>
+                                </div>
+                                <div class="article-tags">
+                                    <span>Content Creator</span>
+                                    <span>Konten Kreatif</span>
+                                    <span>Era Digital</span>
+                                </div>
+                                <div class="reading-time">
+                                    <i class="fas fa-clock"></i> 7-11 menit membaca
+                                </div>
+                                <a href="article4.html" class="btn article-btn mt-3 glowing-border">
+                                    <i class="fas fa-book-open"></i> Baca Artikel
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Info -->
+                <div class="main-content mt-4">
+                    <h3 class="section-title">Tentang Artikel Ini</h3>
+                    <p>Artikel-artikel di halaman ini adalah kumpulan pemikiran, ide, dan pengetahuan yang saya kembangkan melalui pengalaman dan pembelajaran. Setiap artikel mencerminkan perspektif dan pemahaman saya terhadap berbagai topik yang menarik dan relevan.</p>
+                    <p>Anda dapat menemukan artikel-artikel dengan berbagai topik seperti teknologi, budaya, lingkungan, dan pengembangan diri. Saya berharap artikel-artikel ini dapat memberikan wawasan dan manfaat bagi pembaca.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center">
+        <p class="mb-0">©2025 Fawwaz Anggita Yumna Qotrunnada. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+    <!-- Custom Scripts -->
+    <script src="script.js"></script>
+    
+    </body>
+</html>
