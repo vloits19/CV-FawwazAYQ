@@ -96,6 +96,32 @@
         a:hover {
             color: var(--text-color);
         }
+        
+        .quote {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        
+        .stat-box {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 3px solid var(--accent-color);
+        }
+        
+        .code-block {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-left: 3px solid var(--accent-color);
+        }
     </style>
 </head>
 <body>
@@ -151,38 +177,369 @@
                 
                 <div class="main-content mt-4 glowing-border">
                     <div class="article-header">
-                        <h1 class="section-title">Tantangan dalam Pengembangan Game Console Modern</h1>
+                        <h1 class="section-title">Membangun Game 2D dan 3D dengan Unity: Pendekatan, Teknik, dan Tantangan Terkini</h1>
                         <div class="article-meta">
                             <span><i class="fas fa-calendar-alt"></i> 15 September 2025</span>
                             <span><i class="fas fa-user"></i> Fawwaz AYQ</span>
                         </div>
                         <div class="reading-time">
-                            <i class="fas fa-clock"></i> 8-12 menit membaca
+                            <i class="fas fa-clock"></i> 12-15 menit membaca
                         </div>
                     </div>
                     
                     <div class="article-content">
-                        <p>Pengembangan game untuk konsol modern menawarkan tantangan unik yang berbeda dari pengembangan game untuk platform lain. Pembatasan hardware, kebutuhan untuk optimisasi yang ketat, dan persyaratan teknis dari masing-masing platform memerlukan pendekatan yang sangat hati-hati dalam perencanaan dan eksekusi.</p>
+                        <p>Unity adalah salah satu game engine paling populer dan serbaguna dalam industri pengembangan game saat ini. Dengan kemampuannya untuk membuat baik game 2D dan 3D, Unity telah menjadi alat utama bagi pengembang indie maupun studio besar. Dalam artikel ini, kita akan mengeksplorasi pendekatan, teknik, dan tantangan dalam mengembangkan game 2D dan 3D menggunakan Unity, serta bagaimana memilih pendekatan yang tepat tergantung pada kebutuhan proyek.</p>
                         
-                        <p>Salah satu aspek penting dalam pengembangan game console adalah efisiensi penggunaan memori dan daya pemrosesan. Berbeda dengan game PC yang memiliki konfigurasi bervariasi, konsol menawarkan lingkungan yang terdefinisi dengan jelas tetapi juga lebih ketat dalam keterbatasan sumber daya. Ini membutuhkan kemampuan untuk menulis kode yang sangat efisien dan memahami arsitektur perangkat keras secara mendalam.</p>
+                        <div class="stat-box">
+                            <p class="mb-0"><strong>Statistik Penting:</strong> Unity digunakan oleh lebih dari 60% dari game mobile yang terjual di toko aplikasi, dengan lebih dari 2 juta game Unity yang dipublikasikan secara keseluruhan. Unity 2023 LTS (Long Term Support) menjadi versi paling stabil untuk produksi game profesional.</p>
+                        </div>
                         
-                        <h3>Optimisasi Kinerja</h3>
-                        <p>Optimisasi kinerja menjadi fokus utama dalam pengembangan game konsol. Karena konsol memiliki spesifikasi perangkat keras yang tetap selama masa hidupnya, pengembang harus memastikan bahwa game berjalan dengan lancar pada target frame rate (biasanya 30 atau 60 FPS) tanpa mengalami penurunan kinerja.</p>
+                        <h3>1. Perbedaan Mendasar: Game 2D vs 3D di Unity</h3>
+                        <p>Perbedaan utama antara pengembangan game 2D dan 3D di Unity terletak pada sistem koordinat, rendering, dan pendekatan komponen. Sementara game 2D menggunakan sistem koordinat 2D (X dan Y), game 3D menambahkan sumbu Z untuk kedalaman.</p>
                         
-                        <p>Beberapa teknik optimisasi termasuk penggunaan level of detail (LOD) untuk model 3D, implementasi sistem culling untuk tidak merender objek yang tidak terlihat, dan penggunaan teknik kompresi untuk mengurangi ukuran aset tanpa mengorbankan kualitas visual.</p>
+                        <p><strong>Untuk game 2D:</strong></p>
+                        <ul>
+                            <li>Objek menggunakan komponen SpriteRenderer</li>
+                            <li>Physics menggunakan Physics2D</li>
+                            <li>Camera umumnya dalam mode Orthographic</li>
+                            <li>Scripting lebih fokus pada posisi X,Y dan rotasi Z</li>
+                            <li>Lebih sedikit resource yang dibutuhkan untuk rendering</li>
+                        </ul>
                         
-                        <h3>Integrasi Platform</h3>
-                        <p>Platform konsol memiliki sistem dan kebijakan distribusi sendiri yang harus dipatuhi. Ini mencakup persyaratan sertifikasi yang ketat yang harus dipenuhi sebelum game dapat dipasarkan. Pengembang harus memastikan bahwa game memenuhi semua persyaratan teknis, keamanan, dan konten yang ditetapkan oleh masing-masing platform.</p>
+                        <p><strong>Untuk game 3D:</strong></p>
+                        <ul>
+                            <li>Objek menggunakan komponen MeshRenderer</li>
+                            <li>Physics menggunakan Physics3D</li>
+                            <li>Camera dalam mode Perspective untuk efek perspektif</li>
+                            <li>Scripting harus memperhitungkan transformasi 3D penuh</li>
+                            <li>Membutuhkan lebih banyak resource untuk rendering</li>
+                        </ul>
                         
-                        <h3>Masa Depan Pengembangan Konsol</h3>
-                        <p>Dengan munculnya teknologi seperti ray tracing, kecerdasan buatan, dan cloud gaming, pengembangan game konsol terus berinovasi. Masa depan akan membawa tantangan dan peluang baru dalam menciptakan pengalaman gaming yang lebih imersif dan realistis.</p>
+                        <div class="code-block">
+                            <pre>// Contoh perbedaan scripting antara 2D dan 3D
+// Game 2D Movement
+void Update()
+{
+    float moveX = Input.GetAxis("Horizontal");
+    transform.position += new Vector3(moveX * speed * Time.deltaTime, 0, 0);
+}
+
+// Game 3D Movement
+void Update()
+{
+    float moveX = Input.GetAxis("Horizontal");
+    float moveZ = Input.GetAxis("Vertical");
+    Vector3 movement = new Vector3(moveX, 0, moveZ) * speed * Time.deltaTime;
+    transform.Translate(movement);
+}</pre>
+                        </div>
+                        
+                        <h3>2. Optimasi Kinerja dalam Game 2D dan 3D</h3>
+                        <p>Optimasi menjadi krusial tergantung pada tipe game yang dikembangkan. Meskipun game 2D secara umum lebih ringan, tetap membutuhkan pendekatan yang bijak terutama dalam game dengan banyak objek.</p>
+                        
+                        <p><strong>Optimasi untuk Game 2D:</strong></p>
+                        <ul>
+                            <li><strong>Sprite Atlas:</strong> Menggabungkan beberapa sprite ke dalam satu texture untuk mengurangi draw calls</li>
+                            <li><strong>Object Pooling:</strong> Menghindari instantiate/destroy dalam siklus update</li>
+                            <li><strong>Culling:</strong> Tidak merender objek yang tidak terlihat di layar</li>
+                            <li><strong>Sprite Masking:</strong> Efisien untuk efek UI dan visual</li>
+                        </ul>
+                        
+                        <p><strong>Optimasi untuk Game 3D:</strong></p>
+                        <ul>
+                            <li><strong>LOD (Level of Detail):</strong> Menggunakan model yang lebih sederhana untuk objek jauh</li>
+                            <li><strong>Occlusion Culling:</strong> Tidak merender objek yang tertutup</li>
+                            <li><strong>Light Baking:</strong> Pra-komputasi pencahayaan untuk kinerja runtime</li>
+                            <li><strong>Shader Optimization:</strong> Menggunakan shader yang efisien</li>
+                        </ul>
+                        
+                        <div class="code-block">
+                            <pre>// Contoh Object Pooling untuk Game 2D
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BulletPool : MonoBehaviour
+{
+    [SerializeField] private GameObject bulletPrefab;
+    private Queue&lt;GameObject&gt; pool = new Queue&lt;GameObject&gt;();
+    [SerializeField] private int poolSize = 10;
+    
+    void Start()
+    {
+        for (int i = 0; i &lt; poolSize; i++)
+        {
+            GameObject obj = Instantiate(bulletPrefab);
+            obj.SetActive(false);
+            pool.Enqueue(obj);
+        }
+    }
+    
+    public GameObject GetBullet()
+    {
+        if (pool.Count &gt; 0)
+        {
+            GameObject bullet = pool.Dequeue();
+            bullet.SetActive(true);
+            return bullet;
+        }
+        else
+        {
+            return Instantiate(bulletPrefab);
+        }
+    }
+    
+    public void ReturnBullet(GameObject bullet)
+    {
+        bullet.SetActive(false);
+        pool.Enqueue(bullet);
+    }
+}</pre>
+                        </div>
+                        
+                        <h3>3. Sistem Rendering dalam Unity</h3>
+                        <p>Unity menawarkan berbagai sistem rendering yang dapat disesuaikan dengan kebutuhan game. Untuk game 2D, Unity 2D Renderer digunakan, sementara game 3D dapat memanfaatkan berbagai pipeline rendering.</p>
+                        
+                        <p><strong>2D Renderer Pipeline:</strong></p>
+                        <p>Unity menyediakan 2D Renderer yang dioptimalkan untuk game 2D. Ini menyertakan fitur seperti 2D Lighting, 2D Global Illumination, dan Sprite Shape.</p>
+                        
+                        <p><strong>3D Rendering Pipelines:</strong></p>
+                        <ul>
+                            <li><strong>Built-in Render Pipeline:</strong> Pipeline standar Unity, mudah digunakan namun kurang fleksibel</li>
+                            <li><strong>Universal Render Pipeline (URP):</strong> Pipeline modern dengan kinerja lebih baik dan fleksibilitas</li>
+                            <li><strong>High Definition Render Pipeline (HDRP):</strong> Pipeline untuk kualitas visual maksimum</li>
+                        </ul>
+                        
+                        <div class="quote">
+                            "The choice of rendering pipeline significantly impacts both the visual quality and performance of your game. For mobile games, URP is often the best choice as it provides a good balance between quality and performance." - Unity Technical Documentation
+                        </div>
+                        
+                        <h3>4. Implementasi Gameplay Mekanik</h3>
+                        <p>Gameplay mekanik dalam game 2D dan 3D memiliki pendekatan yang berbeda karena kompleksitas dan ruang yang berbeda.</p>
+                        
+                        <p><strong>Gameplay 2D Umum:</strong></p>
+                        <ul>
+                            <li>Platformer (contoh: Super Mario Bros-style)</li>
+                            <li>Side-scrolling shooter</li>
+                            <li>Puzzle games</li>
+                            <li>Tower defense</li>
+                        </ul>
+                        
+                        <p>Contoh implementasi platformer 2D:</p>
+                        
+                        <div class="code-block">
+                            <pre>using UnityEngine;
+
+public class Platformer2DController : MonoBehaviour
+{
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float jumpForce = 10f;
+    private bool isGrounded;
+    private Rigidbody2D rb;
+    
+    void Start()
+    {
+        rb = GetComponent&lt;Rigidbody2D&gt;();
+    }
+    
+    void Update()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+        
+        if (Input.GetButtonDown("Jump") &amp;&amp; isGrounded)
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+    
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+    
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
+}</pre>
+                        </div>
+                        
+                        <p><strong>Gameplay 3D Umum:</strong></p>
+                        <ul>
+                            <li>First/Third Person Shooter</li>
+                            <li>Role-Playing Games (RPG)</li>
+                            <li>Adventure games</li>
+                            <li>Simulation games</li>
+                        </ul>
+                        
+                        <p>Contoh implementasi movement 3D:</p>
+                        
+                        <div class="code-block">
+                            <pre>using UnityEngine;
+
+public class Player3DMovement : MonoBehaviour
+{
+    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundDistance = 0.4f;
+    [SerializeField] private LayerMask groundMask;
+    
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
+    
+    void Start()
+    {
+        controller = GetComponent&lt;CharacterController&gt;();
+    }
+    
+    void Update()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        
+        if (isGrounded &amp;&amp; velocity.y &lt; 0)
+        {
+            velocity.y = -2f;
+        }
+        
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        
+        Vector3 move = transform.right * x + transform.forward * z;
+        controller.Move(move * moveSpeed * Time.deltaTime);
+        
+        if (Input.GetButtonDown("Jump") &amp;&amp; isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+        }
+        
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+    }
+}</pre>
+                        </div>
+                        
+                        <h3>5. UI dan UX dalam Game 2D vs 3D</h3>
+                        <p>Desain UI/UX harus menyesuaikan dengan tipe game. Game 2D memiliki ruang lebih fleksibel untuk elemen UI karena tidak perlu mempertimbangkan perspektif 3D, sementara game 3D harus lebih hati-hati dalam menempatkan elemen UI agar tidak mengganggu pengalaman bermain.</p>
+                        
+                        <p><strong>UI 2D:</strong></p>
+                        <ul>
+                            <li>Lebih mudah dalam penempatan elemen</li>
+                            <li>Dapat mengintegrasikan elemen UI langsung ke dalam game world</li>
+                            <li>Lebih mudah dalam animasi dan efek visual</li>
+                        </ul>
+                        
+                        <p><strong>UI 3D:</strong></p>
+                        <ul>
+                            <li>Harus mempertimbangkan kedalaman dan perspektif</li>
+                            <li>Canvas dapat diatur ke mode World Space untuk elemen dalam game world</li>
+                            <li>Lebih kompleks dalam hal interaksi dan navigasi</li>
+                        </ul>
+                        
+                        <h3>6. Audio dalam Game 2D dan 3D</h3>
+                        <p>Audio dalam Unity juga berbeda pendekatannya antara 2D dan 3D. Dalam game 3D, audio 3D (spatial audio) penting untuk efek imersif, sementara dalam game 2D pendekatan lebih fokus pada sinkronisasi dan layering.</p>
+                        
+                        <div class="code-block">
+                            <pre>// Audio 3D
+using UnityEngine;
+
+public class Audio3DController : MonoBehaviour
+{
+    [SerializeField] private AudioClip audioClip;
+    [SerializeField] private AudioSource audioSource;
+    
+    private void Start()
+    {
+        audioSource = GetComponent&lt;AudioSource&gt;();
+        audioSource.clip = audioClip;
+        audioSource.spatialBlend = 1f; // 1 = full 3D, 0 = 2D
+        audioSource.minDistance = 1f;
+        audioSource.maxDistance = 100f;
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            audioSource.Play();
+        }
+    }
+}
+
+// Audio 2D
+public class Audio2DController : MonoBehaviour
+{
+    [SerializeField] private AudioClip sfxClip;
+    [SerializeField] private AudioSource sfxSource;
+    
+    public void PlaySFX()
+    {
+        sfxSource.PlayOneShot(sfxClip);
+    }
+}</pre>
+                        </div>
+                        
+                        <h3>7. Build dan Deployment</h3>
+                        <p>Unity mendukung berbagai platform untuk game 2D dan 3D, tetapi kebutuhan build dan deployment berbeda:</p>
+                        
+                        <p><strong>Game 2D:</strong></p>
+                        <ul>
+                            <li>Ukuran build umumnya lebih kecil</li>
+                            <li>Kebutuhan hardware lebih rendah</li>
+                            <li>Cocok untuk mobile dan web builds</li>
+                        </ul>
+                        
+                        <p><strong>Game 3D:</strong></p>
+                        <ul>
+                            <li>Ukuran build umumnya lebih besar karena asset 3D</li>
+                            <li>Membutuhkan hardware lebih kuat</li>
+                            <li>Harus mempertimbangkan level of detail untuk berbagai platform</li>
+                        </ul>
+                        
+                        <p>Optimasi build termasuk Asset Bundles untuk download konten dinamis, Addressable Asset System untuk manajemen aset yang efisien, dan platform-specific optimizations.</p>
+                        
+                        <h3>8. Tantangan Umum dan Solusi</h3>
+                        <p>Beberapa tantangan umum dalam pengembangan game Unity:</p>
+                        
+                        <ul>
+                            <li><strong>Garbage Collection:</strong> Menghindari jeda dengan object pooling dan menghindari alokasi memori dalam siklus update</li>
+                            <li><strong>Scaling untuk Berbagai Resolusi:</strong> Menggunakan Canvas Scaler dan referensi resolusi untuk UI</li>
+                            <li><strong>Performance Issues:</strong> Profiling dengan Unity Profiler untuk mengidentifikasi bottleneck</li>
+                            <li><strong>Animation Complexity:</strong> Menggunakan Animator dan Animation Controller untuk manajemen animasi</li>
+                        </ul>
+                        
+                        <h3>9. Teknologi dan Fitur Terbaru di Unity</h3>
+                        <p>Unity terus berkembang dengan fitur-fitur baru:</p>
+                        
+                        <ul>
+                            <li><strong>DOTS (Data-Oriented Technology Stack):</strong> ECS, Job System, dan Burst Compiler untuk performa maksimum</li>
+                            <li><strong>Visual Scripting:</strong> Alat untuk membuat game tanpa code</li>
+                            <li><strong>Unity Cloud Build:</strong> Build otomatis untuk berbagai platform</li>
+                            <li><strong>Netcode for GameObjects:</strong> Networking yang lebih mudah untuk multiplayer</li>
+                        </ul>
+                        
+                        <h3>Kesimpulan</h3>
+                        <p>Pengembangan game 2D dan 3D di Unity menawarkan fleksibilitas dan kemampuan yang luar biasa. Pemilihan pendekatan yang tepat - antara 2D atau 3D - tergantung pada visi kreatif, sumber daya yang tersedia, dan target audiens. Dengan memahami perbedaan mendasar antara kedua pendekatan ini, developer dapat membuat pengalaman game yang optimal baik dari segi performa maupun gameplay.</p>
+                        
+                        <p>Keberhasilan dalam pengembangan game Unity tidak hanya tergantung pada teknik teknis, tetapi juga pada kreativitas, pemahaman pemain, dan siklus iterasi yang efisien. Dengan terus mengikuti perkembangan teknologi dan best practices, developer dapat menciptakan game yang tidak hanya berfungsi dengan baik tetapi juga memberikan pengalaman luar biasa bagi pemain.</p>
                     </div>
                     
                     <div class="article-tags">
                         <span>Game Development</span>
-                        <span>Console</span>
+                        <span>Unity</span>
+                        <span>2D Game</span>
+                        <span>3D Game</span>
+                        <span>Game Engine</span>
                         <span>Optimasi</span>
-                        <span>Tantangan Teknis</span>
+                        <span>Gameplay Programming</span>
                     </div>
                     
                     <div class="mt-4">
@@ -190,7 +547,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <a href="article2.html" class="article-link d-block p-3 border rounded">
-                                    <h5><i class="fas fa-arrow-right me-2"></i>Peran C# dalam Transformasi Digital Dunia Game</h5>
+                                    <h5><i class="fas fa-arrow-right me-2"></i>Arsitektur dan Implementasi C# dalam Dunia Game: Pendekatan Modern dan Teknik Terkini</h5>
                                 </a>
                             </div>
                             <div class="col-md-6">
@@ -202,12 +559,12 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <a href="article3.html" class="article-link d-block p-3 border rounded">
-                                    <h5><i class="fas fa-arrow-right me-2"></i>Masa Depan Pengembangan Web: Tren dan Teknologi Terbaru</h5>
+                                    <h5><i class="fas fa-arrow-right me-2"></i>Revolusi Web Development: Tren Teknologi dan Framework Terkini 2025</h5>
                                 </a>
                             </div>
                             <div class="col-md-6">
                                 <a href="article4.html" class="article-link d-block p-3 border rounded">
-                                    <h5><i class="fas fa-arrow-right me-2"></i>Evolusi Dunia Konten Kreatif di Era Digital</h5>
+                                    <h5><i class="fas fa-arrow-right me-2"></i>Transformasi dan Disrupsi: Dunia Konten Kreatif di Era Digital 2025</h5>
                                 </a>
                             </div>
                         </div>
