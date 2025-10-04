@@ -96,6 +96,24 @@
         a:hover {
             color: var(--text-color);
         }
+        
+        .code-block {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-left: 3px solid var(--accent-color);
+        }
+        
+        .stat-box {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 3px solid var(--accent-color);
+        }
     </style>
 </head>
 <body>
@@ -151,42 +169,297 @@
                 
                 <div class="main-content mt-4 glowing-border">
                     <div class="article-header">
-                        <h1 class="section-title">Peran C# dalam Transformasi Digital Dunia Game</h1>
+                        <h1 class="section-title">Arsitektur dan Implementasi C# dalam Dunia Game: Pendekatan Modern dan Teknik Terkini</h1>
                         <div class="article-meta">
                             <span><i class="fas fa-calendar-alt"></i> 8 September 2025</span>
                             <span><i class="fas fa-user"></i> Fawwaz AYQ</span>
                         </div>
                         <div class="reading-time">
-                            <i class="fas fa-clock"></i> 6-10 menit membaca
+                            <i class="fas fa-clock"></i> 10-14 menit membaca
                         </div>
                     </div>
                     
                     <div class="article-content">
-                        <p>C# telah menjadi salah satu bahasa pemrograman paling populer dalam industri pengembangan game, terutama karena digunakan secara luas dalam platform Unity. Bahasa ini menawarkan kemudahan penggunaan dan fitur-fitur canggih yang memungkinkan pengembang untuk menciptakan pengalaman interaktif yang kompleks.</p>
+                        <p>C# telah menjadi salah satu bahasa paling dominan dalam industri pengembangan game, terutama karena integrasi mendalamnya dengan game engine seperti Unity dan beberapa engine lainnya. Namun, penggunaan C# dalam game development jauh melampaui sekadar menulis script gameplay sederhana. Dalam artikel ini, kita akan mengeksplorasi secara teknis bagaimana C# digunakan dalam implementasi sistem game yang kompleks, dari manajemen memori hingga sistem ECS (Entity Component System), dan bagaimana ekosistemnya mendukung pengembangan game skala besar.</p>
                         
-                        <p>Keunggulan C# dalam pengembangan game termasuk dukungan kuat terhadap pemrograman berorientasi objek, sistem manajemen memori otomatis, dan integrasi yang mulus dengan berbagai middleware dan engine game. Selain itu, C# menawarkan kemampuan untuk mengelola sumber daya secara efisien dan menyediakan alat debugging yang kuat, yang sangat penting dalam proses pengembangan game.</p>
+                        <div class="stat-box">
+                            <p class="mb-0"><strong>Statistik Penting:</strong> C# adalah bahasa terpopuler ke-5 dalam survei State of Game Development 2025, digunakan oleh lebih dari 65% dari game developer profesional, terutama dalam proyek Unity.</p>
+                        </div>
                         
-                        <h3>Keunggulan C# dalam Pengembangan Game</h3>
-                        <p>Salah satu keunggulan utama C# adalah kemampuannya untuk menangani kompleksitas dalam pengembangan game. Dengan konsep pemrograman berorientasi objek, pengembang dapat membuat kode yang modular dan dapat digunakan kembali. Ini sangat penting dalam proyek game yang kompleks yang sering kali memiliki basis kode yang sangat besar.</p>
+                        <h3>1. Arsitektur Berbasis Komponen dalam Unity</h3>
+                        <p>Salah satu kekuatan utama C# dalam Unity adalah sistem komponen yang memberdayakan pendekatan ECS (Entity Component System). Dalam dunia nyata, sistem seperti ini digunakan dalam game besar seperti <em>Hearthstone</em> atau <em>Cities: Skylines</em> untuk mengelola ratusan bahkan ribuan objek game secara efisien.</p>
                         
-                        <p>C# juga menawarkan dukungan untuk multithreading yang memungkinkan pengembang untuk membuat game yang responsif dan efisien. Ini penting untuk memastikan bahwa game berjalan dengan lancar tanpa mengalami lag atau penurunan kinerja.</p>
+                        <p>Contoh implementasi sistem komponen C# yang efisien:</p>
                         
-                        <h3>Integrasi dengan Unity</h3>
-                        <p>Unity, salah satu game engine paling populer di dunia, menggunakan C# sebagai bahasa pemrograman utamanya. Integrasi yang mulus antara C# dan Unity memungkinkan pengembang untuk membuat game dari berbagai genre dan kompleksitas. Unity menyediakan API yang kaya yang memungkinkan pengembang untuk mengakses semua aspek dari game engine.</p>
+                        <div class="code-block">
+                            <pre>// Contoh sistem komponen gameplay player
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    [SerializeField] private float moveSpeed = 5.0f;
+    [SerializeField] private float jumpForce = 8.0f;
+    private Rigidbody rb;
+    private bool isGrounded;
+    
+    void Start()
+    {
+        rb = GetComponent&lt;Rigidbody&gt;();
+    }
+    
+    void Update()
+    {
+        HandleInput();
+    }
+    
+    void FixedUpdate()
+    {
+        Move();
+    }
+    
+    void HandleInput()
+    {
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isGrounded = false;
+        }
+    }
+    
+    void Move()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        
+        Vector3 movement = new Vector3(horizontal, 0, vertical) * moveSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(transform.position + movement);
+    }
+    
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+            isGrounded = true;
+    }
+}</pre>
+                        </div>
                         
-                        <p>Keunggulan lain dari penggunaan C# dengan Unity adalah dukungan komunitas yang luas. Terdapat banyak tutorial, dokumentasi, dan forum diskusi yang membantu pengembang dalam menyelesaikan masalah dan belajar teknik-teknik baru dalam pengembangan game.</p>
+                        <h3>2. Manajemen Memori dan Performa</h3>
+                        <p>Salah satu tantangan kritis dalam penggunaan C# untuk game adalah manajemen memori. Berbeda dengan bahasa seperti C++ yang menawarkan kontrol langsung terhadap memori, C# menggunakan garbage collector (GC) yang dapat menyebabkan penurunan kinerja jika tidak dikelola dengan baik. Dalam game AAA yang membutuhkan frame rate konsisten (60/120 FPS), jeda GC yang tidak terduga dapat merusak pengalaman bermain.</p>
                         
-                        <h3>Masa Depan C# dalam Dunia Game</h3>
-                        <p>Seiring dengan perkembangan teknologi game, C# terus berkembang dan diperbarui. Dengan munculnya teknologi seperti kecerdasan buatan, realitas tertambah, dan realitas virtual, C# terus ditingkatkan untuk mendukung pengembangan game dalam teknologi-teknologi baru ini.</p>
+                        <p>Beberapa teknik untuk mengurangi dampak GC dalam C#:</p>
+                        <ul>
+                            <li><strong>Object Pooling:</strong> Menghindari pembuatan dan penghancuran objek secara terus-menerus</li>
+                            <li><strong>Pre-allocation:</strong> Mengalokasikan objek sebelum dibutuhkan</li>
+                            <li><strong>Stack Allocation:</strong> Menggunakan structs dan span untuk data sementara</li>
+                        </ul>
                         
-                        <p>Masa depan C# dalam dunia game tampak cerah dengan dukungan yang terus meningkat dari Microsoft dan komunitas pengembang global. Ini membuat C# menjadi pilihan yang sangat menarik bagi pengembang game yang ingin membuat pengalaman interaktif yang menarik dan inovatif.</p>
+                        <div class="code-block">
+                            <pre>// Contoh implementasi object pooling untuk peluru
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BulletPool : MonoBehaviour
+{
+    [SerializeField] private GameObject bulletPrefab;
+    private Queue&lt;GameObject&gt; pool = new Queue&lt;GameObject&gt;();
+    
+    [SerializeField] private int poolSize = 20;
+    
+    void Start()
+    {
+        for (int i = 0; i &lt; poolSize; i++)
+        {
+            GameObject obj = Instantiate(bulletPrefab);
+            obj.SetActive(false);
+            pool.Enqueue(obj);
+        }
+    }
+    
+    public GameObject GetBullet()
+    {
+        if (pool.Count &gt; 0)
+        {
+            GameObject bullet = pool.Dequeue();
+            bullet.SetActive(true);
+            return bullet;
+        }
+        else
+        {
+            // Jika pool kosong, buat objek baru
+            GameObject newBullet = Instantiate(bulletPrefab);
+            return newBullet;
+        }
+    }
+    
+    public void ReturnBullet(GameObject bullet)
+    {
+        bullet.SetActive(false);
+        pool.Enqueue(bullet);
+    }
+}</pre>
+                        </div>
+                        
+                        <h3>3. Sistem ECS dan Job System Unity</h3>
+                        <p>Unity secara signifikan meningkatkan performa C# dalam game besar dengan mengenalkan Entity Component System (ECS) dan Job System. ECS mengubah paradigma OOP menjadi data-oriented programming, di mana data disusun secara kontigu dalam memori untuk efisiensi cache CPU. Job System memungkinkan eksekusi paralel kode C# secara aman.</p>
+                        
+                        <p>Implementasi ECS dalam C# untuk sistem AI:</p>
+                        
+                        <div class="code-block">
+                            <pre>// ECS Component
+using Unity.Entities;
+
+public struct HealthComponent : IComponentData
+{
+    public float Value;
+    public float MaxValue;
+}
+
+public struct PositionComponent : IComponentData
+{
+    public float3 Value;
+}
+
+// ECS System
+using Unity.Entities;
+using Unity.Transforms;
+using Unity.Mathematics;
+
+public class HealthSystem : SystemBase
+{
+    protected override void OnUpdate()
+    {
+        float deltaTime = Time.DeltaTime;
+        
+        Entities
+            .WithAll&lt;HealthComponent&gt;()
+            .ForEach((ref HealthComponent health) =>
+            {
+                if (health.Value &lt; health.MaxValue)
+                {
+                    health.Value = math.min(health.Value + deltaTime * 0.1f, health.MaxValue);
+                }
+            }).Schedule();
+    }
+}</pre>
+                        </div>
+                        
+                        <h3>4. Integrasi dengan Native Code</h3>
+                        <p>Dalam beberapa kasus, game membutuhkan performa maksimal yang tidak dapat dicapai hanya dengan C# managed code. Unity mendukung integrasi dengan native code melalui plugin C/C++. Dengan menggunakan P/Invoke, C# bisa memanggil fungsi native secara langsung.</p>
+                        
+                        <p>Contoh integrasi C# dengan native plugin:</p>
+                        
+                        <div class="code-block">
+                            <pre>using System.Runtime.InteropServices;
+using UnityEngine;
+
+public class NativePlugin : MonoBehaviour
+{
+    #if UNITY_IOS
+        private const string DLL_NAME = "__Internal";
+    #else
+        private const string DLL_NAME = "native_plugin";
+    #endif
+    
+    [DllImport(DLL_NAME)]
+    private static extern int ProcessData(int[] data, int length);
+    
+    void Start()
+    {
+        int[] gameData = {1, 2, 3, 4, 5};
+        int result = ProcessData(gameData, gameData.Length);
+        Debug.Log("Process result: " + result);
+    }
+}</pre>
+                        </div>
+                        
+                        <h3>5. Networking dan Multiplayer</h3>
+                        <p>Implementasi sistem multiplayer dalam C# menggunakan framework seperti Unity Netcode for GameObjects atau Mirror Framework. Dalam game AAA seperti <em>Among Us</em> atau <em>Fortnite</em>, arsitektur networking menjadi kritis.</p>
+                        
+                        <p>Contoh dasar sistem networking:</p>
+                        
+                        <div class="code-block">
+                            <pre>using Unity.Netcode;
+using UnityEngine;
+
+public class PlayerNetwork : NetworkBehaviour
+{
+    [SerializeField] private float moveSpeed = 5f;
+    
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            // Hanya pemilik objek yang bisa mengontrolnya
+            Debug.Log("You control this player!");
+        }
+    }
+    
+    void Update()
+    {
+        if (!IsOwner) return;
+        
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        
+        Vector3 movement = new Vector3(horizontal, 0, vertical) * moveSpeed * Time.deltaTime;
+        transform.Translate(movement);
+        
+        // Kirim perubahan ke server
+        if (IsHost) return;
+        MoveServerRpc(movement);
+    }
+    
+    [ServerRpc]
+    void MoveServerRpc(Vector3 movement)
+    {
+        transform.Translate(movement);
+    }
+}</pre>
+                        </div>
+                        
+                        <h3>6. Debugging dan Profiling</h3>
+                        <p>Unity menyediakan alat debugging dan profiling yang kuat untuk C#, termasuk Unity Profiler, Frame Debugger, dan alat analisis performa lainnya. Pengembang juga dapat menggunakan Visual Studio atau Rider untuk debugging lanjutan termasuk profiling memori, analisis kinerja, dan analisis jeda garbage collection.</p>
+                        
+                        <p>Kita juga bisa membuat custom debugging tools di runtime:</p>
+                        
+                        <div class="code-block">
+                            <pre>using UnityEngine;
+
+public class DebugOverlay : MonoBehaviour
+{
+    private void OnGUI()
+    {
+        GUI.Box(new Rect(10, 10, 200, 150), "Debug Overlay");
+        
+        GUILayout.Label($"Frame Time: {1.0f / Time.smoothDeltaTime:F2} ms");
+        GUILayout.Label($"FPS: {Mathf.RoundToInt(1.0f / Time.smoothDeltaTime)}");
+        GUILayout.Label($"Memory: {System.GC.GetTotalMemory(false) / 1024 / 1024} MB");
+        
+        if (GUILayout.Button("Force GC"))
+        {
+            System.GC.Collect();
+        }
+    }
+}</pre>
+                        </div>
+                        
+                        <h3>7. Masa Depan C# dalam Game Development</h3>
+                        <p>Dengan evolusi C# ke versi terbaru (C# 12+), fitur-fitur seperti primary constructors, collection expressions, dan pattern matching membuka kemungkinan baru dalam game development. Selain itu, Unity terus menambahkan dukungan untuk sistem ECS dan Job System yang lebih canggih.</p>
+                        
+                        <p>Ekosistem C# dalam game development juga semakin berkembang dengan library baru seperti UnityDOTS, SynergyKit, dan berbagai framework open-source yang membantu pengembangan game skala besar secara efisien dan efektif.</p>
+                        
+                        <h3>Kesimpulan</h3>
+                        <p>C# telah berevolusi dari bahasa pemrograman umum menjadi alat yang sangat kuat dalam pengembangan game modern. Dengan sistem komponen Unity, ECS, Job System, dan berbagai alat debugging, C# memberikan keseimbangan antara kemudahan penggunaan dan kekuatan teknis yang dibutuhkan dalam pembuatan game skala besar. Bagi para pengembang game, penguasaan teknik-teknik lanjutan dalam C# adalah investasi penting dalam karier mereka di industri yang terus berkembang pesat.</p>
                     </div>
                     
                     <div class="article-tags">
                         <span>Pemrograman</span>
                         <span>C#</span>
-                        <span>Dunia Game</span>
                         <span>Unity</span>
+                        <span>Game Development</span>
+                        <span>ECS</span>
+                        <span>Job System</span>
+                        <span>Optimasi</span>
                     </div>
                     
                     <div class="mt-4">
@@ -194,7 +467,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <a href="article1.html" class="article-link d-block p-3 border rounded">
-                                    <h5><i class="fas fa-arrow-right me-2"></i>Tantangan dalam Pengembangan Game Console Modern</h5>
+                                    <h5><i class="fas fa-arrow-right me-2"></i>Eksplorasi Mendalam: Tantangan dan Inovasi dalam Pengembangan Game Konsol Generasi Baru</h5>
                                 </a>
                             </div>
                             <div class="col-md-6">
