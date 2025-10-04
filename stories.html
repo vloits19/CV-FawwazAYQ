@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,6 +29,10 @@
             padding: 25px;
         }
         
+        .story-card {
+            min-height: 400px;
+        }
+        
         .story-icon {
             position: absolute;
             top: 20px;
@@ -39,12 +44,14 @@
         }
         
         .story-card .card-body {
-            padding-left: 80px; /* Make space for the icon on the left */
+            padding-left: 80px;
+            /* Make space for the icon on the left */
         }
         
         .download-btn {
             background: var(--accent-color);
-            color: var(--primary-color); /* Use CSS variable for better light/dark mode support */
+            color: var(--primary-color);
+            /* Use CSS variable for better light/dark mode support */
             border: none;
             border-radius: 50px;
             padding: 10px 25px;
@@ -60,7 +67,8 @@
             background: #52d9b9;
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
-            color: var(--primary-color); /* Use CSS variable for better light/dark mode support */
+            color: var(--primary-color);
+            /* Use CSS variable for better light/dark mode support */
             text-decoration: none;
         }
         
@@ -130,6 +138,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Particle Background -->
     <div id="particles-js"></div>
@@ -158,7 +167,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.html#experience">Proyek</a>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a class="nav-link active" href="stories.html">Cerita</a>
                     </li>
@@ -181,11 +190,11 @@
                     <h2 class="section-title">Koleksi Cerita</h2>
                     <p>Temukan dunia imajinasi melalui kumpulan cerita yang saya kumpulkan. Setiap cerita membawa pesan dan keunikan tersendiri yang dapat menginspirasi dan menghibur.</p>
                 </div>
-                
-                <div class="row">
+
+                <div class="row row-cols-1 row-cols-md-2 g-4">
                     <!-- Story 1 -->
-                    <div class="col-md-6 mb-4">
-                        <div class="story-card main-content glowing-border">
+                    <div class="col">
+                        <div class="story-card main-content glowing-border h-100">
                             <div class="book-cover glowing-border">
                                 <i class="fas fa-book-open"></i>
                                 <span>Kunci dari Segalanya</span>
@@ -203,10 +212,10 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Story 2 -->
-                    <div class="col-md-6 mb-4">
-                        <div class="story-card main-content glowing-border">
+                    <div class="col">
+                        <div class="story-card main-content glowing-border h-100">
                             <div class="book-cover glowing-border" style="background: linear-gradient(135deg, #6a11cb, #2575fc);">
                                 <i class="fas fa-book"></i>
                                 <span>Why My Friend Knows All</span>
@@ -224,10 +233,10 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Story 3 -->
-                    <div class="col-md-6 mb-4">
-                        <div class="story-card main-content glowing-border">
+                    <div class="col">
+                        <div class="story-card main-content glowing-border h-100">
                             <div class="book-cover glowing-border" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
                                 <i class="fas fa-book-reader"></i>
                                 <span>Epilog</span>
@@ -245,10 +254,10 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Story 4 -->
-                    <div class="col-md-6 mb-4">
-                        <div class="story-card main-content glowing-border">
+                    <div class="col">
+                        <div class="story-card main-content glowing-border h-100">
                             <div class="book-cover glowing-border" style="background: linear-gradient(135deg, #ff416c, #ff4b2b);">
                                 <i class="fas fa-question-circle"></i>
                                 <span>Am I Wrong</span>
@@ -266,8 +275,28 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Story 5 (Centered when odd number) -->
+                    <div class="col-md-6 col-10 mx-auto mb-4">
+                        <div class="story-card main-content glowing-border">
+                            <div class="book-cover glowing-border" style="background: linear-gradient(135deg, #8E2DE2, #4A00E0);">
+                                <i class="fas fa-book"></i>
+                                <span>Tiga Musim Tanpa Kata</span>
+                            </div>
+                            <i class="fas fa-book story-icon"></i>
+                            <div class="card-body">
+                                <h3 class="card-title">Tiga Musim Tanpa Kata</h3>
+                                <p class="card-text">Sebuah cerita penuh makna tentang pengalaman hidup yang penuh dengan peristiwa tak terduga. Kisah yang menggambarkan perjalanan emosional tanpa banyak kata, namun penuh arti mendalam.</p>
+                                <div class="reading-time">
+                                    <i class="fas fa-clock"></i> 15-22 menit membaca
+                                </div>
+                                <a href="Cerita/Tiga Musim Tanpa Kata.docx" class="btn download-btn mt-3 glowing-border" download>
+                                    <i class="fas fa-download"></i> Unduh Cerita
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
+
                 <!-- Additional Info -->
                 <div class="main-content mt-4">
                     <h3 class="section-title">Tentang Koleksi Cerita Ini</h3>
@@ -287,10 +316,11 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
-    
+
+
     <!-- Custom Scripts -->
     <script src="script.js"></script>
-    
-    </body>
+
+</body>
+
 </html>
