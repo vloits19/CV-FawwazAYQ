@@ -4,46 +4,303 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transformasi dan Disrupsi: Dunia Konten Kreatif di Era Digital 2025</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 40px; }
-        h1 { color: #2c3e50; }
-        h2 { color: #34495e; margin-top: 30px; }
-        p { margin-bottom: 15px; }
+        :root {
+            --primary-color: #0a192f;
+            --secondary-color: #495670;
+            --accent-color: #64ffda;
+            --text-color: #e6f1ff;
+            --text-secondary: #a8b2d1;
+            --bg-color: #0a192f;
+            --card-bg: #112240;
+            --border-color: #2a3a50;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+        
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .article-header {
+            background: linear-gradient(135deg, #0a192f, #1a2a6c);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .article-content {
+            padding: 40px;
+        }
+        
+        h2 {
+            color: var(--accent-color);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+        
+        .navigation-section {
+            background: var(--primary-color);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .nav-btn {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, #495670, #2a3a50);
+            color: var(--text-color);
+        }
+        
+        .read-also-btn {
+            background: linear-gradient(135deg, var(--accent-color), #0a192f);
+            color: var(--primary-color);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tag {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .reading-time {
+            background: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+        
+        .article-footer {
+            background: var(--primary-color);
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .nav-btn.read-also-btn:hover, .nav-btn.back-btn:hover {
+            background: linear-gradient(135deg, #52d9b9, #0a192f) !important;
+        }
+        
+        @media (max-width: 768px) {
+            .article-content {
+                padding: 25px;
+            }
+            
+            .article-header {
+                padding: 30px 20px;
+            }
+            
+            .article-header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                min-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Transformasi dan Disrupsi: Dunia Konten Kreatif di Era Digital 2025</h1>
+    <div class="container mt-5">
+        <div class="article-container">
+            <div class="article-header">
+                <h1><i class="fas fa-file-video me-3"></i>Transformasi dan Disrupsi: Dunia Konten Kreatif di Era Digital 2025</h1>
+                <div class="article-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>20 Agustus 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-user"></i>
+                        <span>Fawwaz AYQ</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>15-18 menit membaca</span>
+                    </div>
+                </div>
+                <div class="article-tags mt-3">
+                    <span class="tag">Content Creator</span>
+                    <span class="tag">Creator Economy</span>
+                    <span class="tag">Digital Transformation</span>
+                    <span class="tag">Teknologi AI</span>
+                </div>
+            </div>
+            
+            <div class="article-content">
+                <div class="navigation-section">
+                    <h4><i class="fas fa-compass me-2"></i>Navigasi Artikel</h4>
+                    <div class="nav-buttons">
+                        <a href="articles.html" class="nav-btn back-btn">
+                            <i class="fas fa-arrow-left"></i> Kembali ke Artikel
+                        </a>
+                        <a href="#read-also" class="nav-btn read-also-btn">
+                            <i class="fas fa-book-reader"></i> Baca Juga
+                        </a>
+                    </div>
+                </div>
 
-    <h2>Pendahuluan</h2>
-    <p>Tahun 2025 membawa perubahan mendasar dalam cara kita mencipta, mengakses, dan berinteraksi dengan konten digital. Dunia teknologi kini bergerak lebih cepat dari sebelumnya, dan inovasi terus muncul memperkenalkan cara-cara baru dalam menghasilkan dan menikmati berbagai bentuk kreativitas. Dari video pendek hingga seni digital, dari musik hingga buku elektronik, semua kini tertransformasi oleh kemajuan teknologi.</p>
-    <p>Transformasi ini tidak hanya memengaruhi industri besar, tetapi juga membuka peluang baru bagi individu dan komunitas lokal untuk mengekspresikan diri dan berbagi ide mereka. Dunia konten kreatif kini lebih inklusif, lebih interaktif, dan lebih mudah diakses oleh siapa pun yang memiliki semangat dan kreativitas.</p>
-    <p>Perubahan ini juga membawa disrupsi, menggantikan model lama dengan pendekatan baru yang lebih efisien dan inovatif. Dalam dunia pendidikan dan kreativitas, generasi muda kini berada di garda depan inovasi ini, mendorong batas-batas yang sebelumnya dianggap mustahil.</p>
+                <h2>Pendahuluan</h2>
+                <p>Tahun 2025 membawa perubahan mendasar dalam cara kita mencipta, mengakses, dan berinteraksi dengan konten digital. Dunia teknologi kini bergerak lebih cepat dari sebelumnya, dan inovasi terus muncul memperkenalkan cara-cara baru dalam menghasilkan dan menikmati berbagai bentuk kreativitas. Dari video pendek hingga seni digital, dari musik hingga buku elektronik, semua kini tertransformasi oleh kemajuan teknologi.</p>
+                <p>Transformasi ini tidak hanya memengaruhi industri besar, tetapi juga membuka peluang baru bagi individu dan komunitas lokal untuk mengekspresikan diri dan berbagi ide mereka. Dunia konten kreatif kini lebih inklusif, lebih interaktif, dan lebih mudah diakses oleh siapa pun yang memiliki semangat dan kreativitas.</p>
+                <p>Perubahan ini juga membawa disrupsi, menggantikan model lama dengan pendekatan baru yang lebih efisien dan inovatif. Dalam dunia pendidikan dan kreativitas, generasi muda kini berada di garda depan inovasi ini, mendorong batas-batas yang sebelumnya dianggap mustahil.</p>
 
-    <h2>Perkembangan Teknologi dalam Produksi Konten</h2>
-    <p>Di tahun 2025, teknologi produksi konten mengalami lompatan besar berkat kemajuan kecerdasan buatan (AI) dan tools yang semakin mudah digunakan. Software editing video, desain grafis, dan produksi musik kini memiliki fitur AI yang bisa membantu bahkan menggantikan sebagian proses manual yang sebelumnya memakan waktu lama.</p>
-    <p>Contohnya adalah penggunaan AI dalam menghasilkan gambar dari teks, yang memungkinkan siapa pun dengan ide untuk menciptakan visual yang menakjubkan tanpa harus menguasai teknik seni digital secara mendalam. Hal ini membuka peluang bagi lebih banyak orang untuk mewujudkan imajinasi mereka dalam bentuk visual.</p>
-    <p>Virtual reality (VR) dan augmented reality (AR) juga semakin matang, memungkinkan pengalaman konten yang lebih imersif. Komunitas pelajar dan seniman muda kini bisa menciptakan dunia digital yang sebelumnya hanya bisa dibayangkan, dan membagikannya dengan pengguna di seluruh dunia.</p>
+                <h2>Perkembangan Teknologi dalam Produksi Konten</h2>
+                <p>Di tahun 2025, teknologi produksi konten mengalami lompatan besar berkat kemajuan kecerdasan buatan (AI) dan tools yang semakin mudah digunakan. Software editing video, desain grafis, dan produksi musik kini memiliki fitur AI yang bisa membantu bahkan menggantikan sebagian proses manual yang sebelumnya memakan waktu lama.</p>
+                <p>Contohnya adalah penggunaan AI dalam menghasilkan gambar dari teks, yang memungkinkan siapa pun dengan ide untuk menciptakan visual yang menakjubkan tanpa harus menguasai teknik seni digital secara mendalam. Hal ini membuka peluang bagi lebih banyak orang untuk mewujudkan imajinasi mereka dalam bentuk visual.</p>
+                <p>Virtual reality (VR) dan augmented reality (AR) juga semakin matang, memungkinkan pengalaman konten yang lebih imersif. Komunitas pelajar dan seniman muda kini bisa menciptakan dunia digital yang sebelumnya hanya bisa dibayangkan, dan membagikannya dengan pengguna di seluruh dunia.</p>
 
-    <h2>Platform dan Distribusi Konten Digital</h2>
-    <p>Platform distribusi konten juga mengalami transformasi besar. Selain platform tradisional seperti YouTube, Instagram, dan TikTok, muncul platform baru yang lebih fokus pada kolaborasi dan komunitas. Platform seperti ini mengizinkan pengguna untuk tidak hanya menikmati konten, tetapi juga ikut serta dalam proses pembuatan dan pengembangan ide.</p>
-    <p>Blockchain dan teknologi NFT (non-fungible token) juga memberikan opsi baru bagi pembuat konten untuk memiliki dan mengelola karyanya secara lebih mandiri. Meskipun masih kontroversial, ini membuka diskusi baru tentang kepemilikan digital dan cara baru dalam mendanai proyek kreatif.</p>
+                <h2>Platform dan Distribusi Konten Digital</h2>
+                <p>Platform distribusi konten juga mengalami transformasi besar. Selain platform tradisional seperti YouTube, Instagram, dan TikTok, muncul platform baru yang lebih fokus pada kolaborasi dan komunitas. Platform seperti ini mengizinkan pengguna untuk tidak hanya menikmati konten, tetapi juga ikut serta dalam proses pembuatan dan pengembangan ide.</p>
+                <p>Blockchain dan teknologi NFT (non-fungible token) juga memberikan opsi baru bagi pembuat konten untuk memiliki dan mengelola karyanya secara lebih mandiri. Meskipun masih kontroversial, ini membuka diskusi baru tentang kepemilikan digital dan cara baru dalam mendanai proyek kreatif.</p>
 
-    <h2>Komunitas dan Kolaborasi Digital</h2>
-    <p>Peran komunitas dalam dunia konten kreatif kini semakin besar. Di tahun 2025, kolaborasi lintas wilayah dan lintas disiplin ilmu menjadi norma baru. Pelajar dari berbagai belahan dunia kini bisa dengan mudah bekerja sama dalam proyek-proyek kreatif, berbagi sumber daya, dan saling belajar satu sama lain.</p>
-    <p>Komunitas online menjadi wadah penting bagi pertukaran ide dan pengetahuan. Forum diskusi, server Discord, dan grup media sosial menjadi tempat berkembangnya inovasi baru dan tempat untuk belajar keterampilan baru dalam dunia kreatif digital.</p>
+                <h2>Komunitas dan Kolaborasi Digital</h2>
+                <p>Peran komunitas dalam dunia konten kreatif kini semakin besar. Di tahun 2025, kolaborasi lintas wilayah dan lintas disiplin ilmu menjadi norma baru. Pelajar dari berbagai belahan dunia kini bisa dengan mudah bekerja sama dalam proyek-proyek kreatif, berbagi sumber daya, dan saling belajar satu sama lain.</p>
+                <p>Komunitas online menjadi wadah penting bagi pertukaran ide dan pengetahuan. Forum diskusi, server Discord, dan grup media sosial menjadi tempat berkembangnya inovasi baru dan tempat untuk belajar keterampilan baru dalam dunia kreatif digital.</p>
 
-    <h2>Tantangan dalam Dunia Konten Kreatif Digital</h2>
-    <p>Namun, transformasi ini juga membawa tantangan baru. Salah satunya adalah soal kualitas dan keaslian konten. Dengan semakin mudahnya menghasilkan konten berkat AI dan tools otomatis, muncul pertanyaan besar tentang nilai dan originalitas dalam dunia kreatif.</p>
-    <p>Isu privasi dan hak cipta juga menjadi perhatian utama. Penggunaan data dan karya orang lain tanpa izin, atau bahkan pelanggaran terhadap karya AI, menjadi topik yang hangat diperbincangkan dalam berbagai forum diskusi teknologi.</p>
-    <p>Selain itu, kecepatan perubahan teknologi juga menuntut pengguna untuk terus belajar dan beradaptasi. Mereka yang tidak siap mengikuti perkembangan ini bisa dengan cepat tertinggal dalam dunia yang terus berubah.</p>
+                <h2>Tantangan dalam Dunia Konten Kreatif Digital</h2>
+                <p>Namun, transformasi ini juga membawa tantangan baru. Salah satunya adalah soal kualitas dan keaslian konten. Dengan semakin mudahnya menghasilkan konten berkat AI dan tools otomatis, muncul pertanyaan besar tentang nilai dan originalitas dalam dunia kreatif.</p>
+                <p>Isu privasi dan hak cipta juga menjadi perhatian utama. Penggunaan data dan karya orang lain tanpa izin, atau bahkan pelanggaran terhadap karya AI, menjadi topik yang hangat diperbincangkan dalam berbagai forum diskusi teknologi.</p>
+                <p>Selain itu, kecepatan perubahan teknologi juga menuntut pengguna untuk terus belajar dan beradaptasi. Mereka yang tidak siap mengikuti perkembangan ini bisa dengan cepat tertinggal dalam dunia yang terus berubah.</p>
 
-    <h2>Dampak Sosial dan Budaya</h2>
-    <p>Transformasi dalam dunia konten kreatif digital juga membawa dampak sosial dan budaya yang luas. Budaya lokal kini bisa lebih mudah dipromosikan dan diapresiasi melalui berbagai platform digital. Komunitas lokal bisa menjangkau audiens global, memperkenalkan tradisi dan nilai-nilai mereka dalam format digital.</p>
-    <p>Di sisi lain, globalisasi konten juga bisa membawa risiko homogenisasi budaya. Penting bagi komunitas digital untuk menjaga keberagaman dan memberikan ruang bagi ekspresi lokal dalam kerangka global.</p>
+                <h2>Dampak Sosial dan Budaya</h2>
+                <p>Transformasi dalam dunia konten kreatif digital juga membawa dampak sosial dan budaya yang luas. Budaya lokal kini bisa lebih mudah dipromosikan dan diapresiasi melalui berbagai platform digital. Komunitas lokal bisa menjangkau audiens global, memperkenalkan tradisi dan nilai-nilai mereka dalam format digital.</p>
+                <p>Di sisi lain, globalisasi konten juga bisa membawa risiko homogenisasi budaya. Penting bagi komunitas digital untuk menjaga keberagaman dan memberikan ruang bagi ekspresi lokal dalam kerangka global.</p>
 
-    <h2>Kesimpulan</h2>
-    <p>Transformasi dan disrupsi dalam dunia konten kreatif di era digital 2025 membuka peluang besar bagi generasi muda yang kreatif dan inovatif. Dengan teknologi yang semakin canggih dan platform yang lebih terbuka, siapa pun bisa menjadi bagian dari revolusi kreatif ini.</p>
-    <p>Namun, tantangan juga tidak kalah penting, dari soal kualitas karya hingga isu etika dalam penggunaan teknologi. Yang paling penting adalah bagaimana kita bisa memanfaatkan peluang ini secara bertanggung jawab, menciptakan dunia digital yang inklusif, kaya, dan bermakna.</p>
-    <p>Ke depan, dengan semangat kolaborasi dan semangat belajar, dunia konten kreatif digital akan terus berkembang, menciptakan ruang bagi ekspresi dan inovasi yang tak terbatas.</p>
+                <h2>Kesimpulan</h2>
+                <p>Transformasi dan disrupsi dalam dunia konten kreatif di era digital 2025 membuka peluang besar bagi generasi muda yang kreatif dan inovatif. Dengan teknologi yang semakin canggih dan platform yang lebih terbuka, siapa pun bisa menjadi bagian dari revolusi kreatif ini.</p>
+                <p>Namun, tantangan juga tidak kalah penting, dari soal kualitas karya hingga isu etika dalam penggunaan teknologi. Yang paling penting adalah bagaimana kita bisa memanfaatkan peluang ini secara bertanggung jawab, menciptakan dunia digital yang inklusif, kaya, dan bermakna.</p>
+                <p>Ke depan, dengan semangat kolaborasi dan semangat belajar, dunia konten kreatif digital akan terus berkembang, menciptakan ruang bagi ekspresi dan inovasi yang tak terbatas.</p>
+                
+                <div id="read-also" class="navigation-section">
+                    <h4><i class="fas fa-book-open me-2"></i>Baca Juga Artikel Lainnya</h4>
+                    <div class="nav-buttons">
+                        <a href="article1.html" class="nav-btn read-also-btn">
+                            <i class="fas fa-arrow-right"></i> Membangun Game 2D dan 3D dengan Unity
+                        </a>
+                        <a href="article2.html" class="nav-btn read-also-btn">
+                            <i class="fas fa-arrow-right"></i> Arsitektur & Implementasi C# dalam Dunia Game
+                        </a>
+                        <a href="article3.html" class="nav-btn read-also-btn">
+                            <i class="fas fa-arrow-right"></i> Revolusi Web Development 2025
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="article-footer">
+                <p>©2025 Fawwaz Anggita Yumna Qotrunnada. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
