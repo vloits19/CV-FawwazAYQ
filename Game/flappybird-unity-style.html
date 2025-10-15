@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird - Unity Console Style</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #2d2d2d;
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .console-header {
+            background-color: #222222;
+            padding: 10px;
+            border-bottom: 1px solid #444444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .console-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .unity-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #fff;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .game-area {
+            flex: 3;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .console-area {
+            flex: 2;
+            background-color: #1e1e1e;
+            border-left: 1px solid #444444;
+            padding: 10px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #gameCanvas {
+            margin: 10px auto;
+            display: block;
+            border: 1px solid #444;
+            background-color: #70c5ce;
+            border-radius: 5px;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .controls {
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 0 5px;
+            font-family: 'Courier New', monospace;
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #333;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .score {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .instructions {
+            font-size: 14px;
+            color: #cccccc;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .console-line {
+            margin: 3px 0;
+            font-size: 13px;
+        }
+
+        .console-log {
+            color: #ffffff;
+        }
+
+        .console-warning {
+            color: #ffff00;
+        }
+
+        .console-error {
+            color: #ff5555;
+        }
+
+        .console-system {
+            color: #55ff55;
+        }
+
+        .game-title {
+            color: #4CAF50;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="console-header">
+        <div class="console-title">
+            <span class="unity-icon"></span>
+            Unity Game Console - Flappy Bird
+        </div>
+        <div>
+            <button id="buildBtn">Build</button>
+            <button id="playBtn">Play</button>
+            <button id="stopBtn">Stop</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="game-area">
+            <h2 class="game-title">Flappy Bird - Unity Style</h2>
+            <div id="gameCanvas">
+                <canvas id="game" width="400" height="600"></canvas>
+            </div>
+            <div class="controls">
+                <button id="startBtn">Start Game</button>
+                <button id="resetBtn">Reset</button>
+            </div>
+            <div class="score">
+                <p>Score: <span id="score">0</span></p>
+            </div>
+            <div class="instructions">
+                <p>Press SPACE or CLICK to flap</p>
+            </div>
+        </div>
+
+        <div class="console-area">
+            <div id="consoleOutput">
+                <div class="console-line console-system">Unity Console - Game Development Interface</div>
+                <div class="console-line console-system">Initializing Flappy Bird Project...</div>
+                <div class="console-line console-system">Loading Assets...</div>
+                <div class="console-line console-system">Scenes/FlappyBird.unity loaded</div>
+                <div class="console-line console-log">BirdController initialized</div>
+                <div class="console-line console-log">PipeSpawner initialized</div>
+                <div class="console-line console-log">Physics material set for bird</div>
+                <div class="console-line console-warning">No lighting settings found. Using default.</div>
+                <div class="console-line console-system">Ready to play</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game variables
+        const canvas = document.getElementById('game');
+        const ctx = canvas.getContext('2d');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const scoreElement = document.getElementById('score');
+        const playBtn = document.getElementById('playBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const consoleOutput = document.getElementById('consoleOutput');
+
+        // Add message to console
+        function addToConsole(message, type = 'log') {
+            const line = document.createElement('div');
+            line.className = `console-line console-${type}`;
+            line.textContent = message;
+            consoleOutput.appendChild(line);
+            
+            // Auto-scroll to bottom
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        // Game state
+        let gameRunning = false;
+        let score = 0;
+        let frames = 0;
+
+        // Bird properties
+        const bird = {
+            x: 50,
+            y: canvas.height / 2 - 10,
+            width: 34,
+            height: 24,
+            gravity: 0.25,
+            velocity: 0,
+            jump: -5,
+
+            draw: function() {
+                // Draw bird as a simple rectangle with a beak and eye
+                ctx.fillStyle = '#FFD700'; // Yellow body
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+                
+                // Draw beak
+                ctx.fillStyle = '#FF8C00'; // Orange beak
+                ctx.fillRect(this.x + 34, this.y + 10, 10, 5);
+                
+                // Draw eye
+                ctx.fillStyle = 'black';
+                ctx.fillRect(this.x + 25, this.y + 8, 3, 3);
+            },
+
+            update: function() {
+                if (gameRunning) {
+                    // Apply gravity
+                    this.velocity += this.gravity;
+                    this.y += this.velocity;
+
+                    // Floor collision
+                    if (this.y + this.height >= canvas.height - ground.height) {
+                        this.y = canvas.height - ground.height - this.height;
+                        gameOver();
+                    }
+
+                    // Ceiling collision
+                    if (this.y <= 0) {
+                        this.y = 0;
+                        this.velocity = 0;
+                    }
+                }
+            },
+
+            flap: function() {
+                this.velocity = this.jump;
+                if (gameRunning) {
+                    addToConsole(`Bird velocity set to ${this.velocity}`, 'log');
+                }
+            },
+
+            reset: function() {
+                this.y = canvas.height / 2 - 10;
+                this.velocity = 0;
+            }
+        };
+
+        // Pipes
+        const pipes = {
+            position: [],
+            gap: 150,
+            maxYPos: -150,
+            dx: 2,
+
+            draw: function() {
+                for (let i = 0; i < this.position.length; i++) {
+                    let p = this.position[i];
+                    
+                    // Top pipe
+                    ctx.fillStyle = '#00A000'; // Green
+                    ctx.fillRect(p.x, p.y, p.width, p.height);
+
+                    // Bottom pipe
+                    ctx.fillStyle = '#00A000'; // Green
+                    ctx.fillRect(p.x, p.y + p.height + this.gap, p.width, canvas.height);
+                    
+                    // Pipe caps
+                    ctx.fillStyle = '#008000'; // Darker green
+                    ctx.fillRect(p.x - 3, p.y + p.height - 15, p.width + 6, 15);
+                    ctx.fillRect(p.x - 3, p.y + p.height + this.gap, p.width + 6, 15);
+                }
+            },
+
+            update: function() {
+                if (gameRunning) {
+                    if (frames % 100 === 0) {
+                        this.position.push({
+                            x: canvas.width,
+                            y: this.maxYPos * (Math.random() + 1),
+                            width: 60,
+                            height: 300
+                        });
+                        addToConsole(`New pipe created at x: ${canvas.width}`, 'log');
+                    }
+
+                    for (let i = 0; i < this.position.length; i++) {
+                        let p = this.position[i];
+
+                        // Move pipe to the left
+                        p.x -= this.dx;
+
+                        // If pipe is off screen, remove it and add score
+                        if (p.x + p.width <= 0) {
+                            this.position.shift();
+                            score++;
+                            scoreElement.innerHTML = score;
+                            addToConsole(`Pipe removed. Score: ${score}`, 'log');
+                        }
+
+                        // Collision detection
+                        const birdRight = bird.x + bird.width;
+                        const pipeLeft = p.x;
+                        const pipeRight = p.x + p.width;
+                        const birdBottom = bird.y + bird.height;
+                        
+                        // Check if bird is within the pipe's x range
+                        if (birdRight > pipeLeft && bird.x < pipeRight) {
+                            // Check if bird hits top or bottom pipe
+                            if (bird.y < p.height || birdBottom > p.height + this.gap) {
+                                gameOver();
+                            }
+                            
+                            // Check if bird passed the pipe
+                            else if (bird.x > pipeRight && !p.passed) {
+                                p.passed = true;
+                                score++;
+                                scoreElement.innerHTML = score;
+                                addToConsole(`Pipe passed! Score: ${score}`, 'log');
+                            }
+                        }
+                    }
+                }
+            },
+
+            reset: function() {
+                this.position = [];
+            }
+        };
+
+        // Ground
+        const ground = {
+            height: 80,
+            draw: function() {
+                ctx.fillStyle = '#DEB887'; // Tan color
+                ctx.fillRect(0, canvas.height - this.height, canvas.width, this.height);
+                
+                // Draw grass on top
+                ctx.fillStyle = '#7CFC00'; // Lawn green
+                ctx.fillRect(0, canvas.height - this.height, canvas.width, 15);
+            }
+        };
+
+        // Background elements
+        const background = {
+            draw: function() {
+                // Draw sky
+                ctx.fillStyle = '#70c5ce';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw clouds
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.arc(100, 80, 20, 0, Math.PI * 2);
+                ctx.arc(130, 80, 25, 0, Math.PI * 2);
+                ctx.arc(160, 80, 20, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.beginPath();
+                ctx.arc(300, 120, 20, 0, Math.PI * 2);
+                ctx.arc(330, 120, 25, 0, Math.PI * 2);
+                ctx.arc(360, 120, 20, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        };
+
+        // Draw everything
+        function draw() {
+            background.draw();
+            pipes.draw();
+            ground.draw();
+            bird.draw();
+        }
+
+        // Update game state
+        function update() {
+            bird.update();
+            pipes.update();
+        }
+
+        // Game loop
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            update();
+            draw();
+            
+            frames++;
+            
+            if (gameRunning) {
+                requestAnimationFrame(gameLoop);
+            }
+        }
+
+        // Start game
+        function startGame() {
+            if (!gameRunning) {
+                gameRunning = true;
+                addToConsole('Game started', 'system');
+                gameLoop();
+            }
+        }
+
+        // Game over
+        function gameOver() {
+            gameRunning = false;
+            addToConsole('Game Over! Collision detected', 'error');
+            alert(`Game Over! Your score: ${score}`);
+        }
+
+        // Reset game
+        function resetGame() {
+            gameRunning = false;
+            score = 0;
+            frames = 0;
+            scoreElement.innerHTML = score;
+            bird.reset();
+            pipes.reset();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            draw(); // Draw the initial state
+            addToConsole('Game reset', 'system');
+        }
+
+        // Event listeners
+        startBtn.addEventListener('click', function() {
+            if (!gameRunning) {
+                startGame();
+            }
+        });
+
+        playBtn.addEventListener('click', function() {
+            if (!gameRunning) {
+                startGame();
+            } else {
+                addToConsole('Game is already running', 'warning');
+            }
+        });
+
+        stopBtn.addEventListener('click', function() {
+            if (gameRunning) {
+                gameRunning = false;
+                addToConsole('Game stopped', 'system');
+            }
+        });
+
+        resetBtn.addEventListener('click', resetGame);
+
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space') {
+                if (gameRunning) {
+                    bird.flap();
+                } else {
+                    startGame();
+                }
+            }
+        });
+
+        canvas.addEventListener('click', function() {
+            if (gameRunning) {
+                bird.flap();
+            } else {
+                startGame();
+            }
+        });
+
+        // Initialize the game
+        draw();
+        addToConsole('Flappy Bird game initialized', 'system');
+    </script>
+</body>
+</html>
