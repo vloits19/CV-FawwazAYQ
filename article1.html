@@ -4,44 +4,301 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Membangun Game 2D dan 3D dengan Unity</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 40px; }
-        h1 { color: #2c3e50; }
-        h2 { color: #34495e; margin-top: 30px; }
-        p { margin-bottom: 15px; }
+        :root {
+            --primary-color: #0a192f;
+            --secondary-color: #495670;
+            --accent-color: #64ffda;
+            --text-color: #e6f1ff;
+            --text-secondary: #a8b2d1;
+            --bg-color: #0a192f;
+            --card-bg: #112240;
+            --border-color: #2a3a50;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+        
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .article-header {
+            background: linear-gradient(135deg, #0a192f, #1a2a6c);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .article-content {
+            padding: 40px;
+        }
+        
+        h2 {
+            color: var(--accent-color);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+        
+        .navigation-section {
+            background: var(--primary-color);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .nav-btn {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, #495670, #2a3a50);
+            color: var(--text-color);
+        }
+        
+        .read-also-btn {
+            background: linear-gradient(135deg, var(--accent-color), #0a192f);
+            color: var(--primary-color);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tag {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .reading-time {
+            background: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+        
+        .article-footer {
+            background: var(--primary-color);
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .nav-btn.read-also-btn:hover, .nav-btn.back-btn:hover {
+            background: linear-gradient(135deg, #52d9b9, #0a192f) !important;
+        }
+        
+        @media (max-width: 768px) {
+            .article-content {
+                padding: 25px;
+            }
+            
+            .article-header {
+                padding: 30px 20px;
+            }
+            
+            .article-header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                min-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Membangun Game 2D dan 3D dengan Unity</h1>
+    <div class="container mt-5">
+        <div class="article-container">
+            <div class="article-header">
+                <h1><i class="fas fa-gamepad me-3"></i>Membangun Game 2D dan 3D dengan Unity</h1>
+                <div class="article-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>15 September 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-user"></i>
+                        <span>Fawwaz AYQ</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>12-15 menit membaca</span>
+                    </div>
+                </div>
+                <div class="article-tags mt-3">
+                    <span class="tag">Game Development</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">2D Game</span>
+                    <span class="tag">3D Game</span>
+                </div>
+            </div>
+            
+            <div class="article-content">
+                <div class="navigation-section">
+                    <h4><i class="fas fa-compass me-2"></i>Navigasi Artikel</h4>
+                    <div class="nav-buttons">
+                        <a href="articles.html" class="nav-btn back-btn">
+                            <i class="fas fa-arrow-left"></i> Kembali ke Artikel
+                        </a>
+                        <a href="#read-also" class="nav-btn read-also-btn">
+                            <i class="fas fa-book-reader"></i> Baca Juga
+                        </a>
+                    </div>
+                </div>
 
-    <h2>Pendahuluan</h2>
-    <p>Tahun 2025 menjadi titik balik dalam dunia pengembangan game. Teknologi yang semakin canggih memungkinkan siapa pun, termasuk pelajar dan penggemar game, untuk menciptakan pengalaman bermain yang menakjubkan. Salah satu platform yang tetap menjadi pilihan utama adalah Unity, sebuah engine pengembangan game yang fleksibel dan kuat.</p>
-    <p>Unity bukan hanya alat untuk studio game besar; kini menjadi jembatan bagi para pelajar dan pengembang independen untuk mewujudkan imajinasi mereka dalam bentuk game interaktif. Dengan kemampuan untuk mengembangkan game 2D dan 3D, Unity memberikan kesempatan luas bagi siapa pun yang ingin berkreasi di dunia digital.</p>
-    <p>Dalam perkembangan 2025, Unity semakin ramah pengguna dengan berbagai fitur baru yang mempercepat proses pengembangan. Dari visual scripting hingga integrasi AI, alat ini terus berinovasi, memungkinkan pembuatan game yang sebelumnya hanya bisa dibayangkan.</p>
+                <h2>Pendahuluan</h2>
+                <p>Tahun 2025 menjadi titik balik dalam dunia pengembangan game. Teknologi yang semakin canggih memungkinkan siapa pun, termasuk pelajar dan penggemar game, untuk menciptakan pengalaman bermain yang menakjubkan. Salah satu platform yang tetap menjadi pilihan utama adalah Unity, sebuah engine pengembangan game yang fleksibel dan kuat.</p>
+                <p>Unity bukan hanya alat untuk studio game besar; kini menjadi jembatan bagi para pelajar dan pengembang independen untuk mewujudkan imajinasi mereka dalam bentuk game interaktif. Dengan kemampuan untuk mengembangkan game 2D dan 3D, Unity memberikan kesempatan luas bagi siapa pun yang ingin berkreasi di dunia digital.</p>
+                <p>Dalam perkembangan 2025, Unity semakin ramah pengguna dengan berbagai fitur baru yang mempercepat proses pengembangan. Dari visual scripting hingga integrasi AI, alat ini terus berinovasi, memungkinkan pembuatan game yang sebelumnya hanya bisa dibayangkan.</p>
 
-    <h2>Perkembangan Game 2D di Unity</h2>
-    <p>Tahun 2025 membawa kemajuan signifikan dalam pengembangan game 2D. Unity menghadirkan fitur Sprite Shape dan 2D Renderer yang membuat pembuatan game 2D menjadi jauh lebih efisien dan visualnya lebih menarik. Para pelajar kini dapat dengan mudah menggabungkan elemen seni digital dengan logika pemrograman untuk menciptakan game yang menyenangkan.</p>
-    <p>Game 2D seperti puzzle, platformer, dan visual novel mengalami peningkatan kualitas berkat shader yang lebih canggih serta dukungan animasi yang lebih baik. Unity's 2D Animation Package memungkinkan pembuatan karakter yang hidup dan dunia yang dinamis, tanpa memerlukan keahlian animasi tingkat tinggi.</p>
-    <p>Contoh nyata dari inovasi ini adalah game-game kecil yang dibuat oleh komunitas pelajar di Indonesia, seperti game edukasi berbasis puzzle yang menggabungkan elemen budaya lokal dengan mekanika modern. Game ini tidak hanya menyenangkan tetapi juga memiliki nilai edukatif yang tinggi.</p>
+                <h2>Perkembangan Game 2D di Unity</h2>
+                <p>Tahun 2025 membawa kemajuan signifikan dalam pengembangan game 2D. Unity menghadirkan fitur Sprite Shape dan 2D Renderer yang membuat pembuatan game 2D menjadi jauh lebih efisien dan visualnya lebih menarik. Para pelajar kini dapat dengan mudah menggabungkan elemen seni digital dengan logika pemrograman untuk menciptakan game yang menyenangkan.</p>
+                <p>Game 2D seperti puzzle, platformer, dan visual novel mengalami peningkatan kualitas berkat shader yang lebih canggih serta dukungan animasi yang lebih baik. Unity's 2D Animation Package memungkinkan pembuatan karakter yang hidup dan dunia yang dinamis, tanpa memerlukan keahlian animasi tingkat tinggi.</p>
+                <p>Contoh nyata dari inovasi ini adalah game-game kecil yang dibuat oleh komunitas pelajar di Indonesia, seperti game edukasi berbasis puzzle yang menggabungkan elemen budaya lokal dengan mekanika modern. Game ini tidak hanya menyenangkan tetapi juga memiliki nilai edukatif yang tinggi.</p>
 
-    <h2>Perkembangan Game 3D di Unity</h2>
-    <p>Di sisi lain, pengembangan game 3D juga mengalami revolusi. Unity 2025 menawarkan Unity 3D Render Pipeline yang lebih canggih, seperti Universal Render Pipeline (URP) dan High Definition Render Pipeline (HDRP), yang memungkinkan pengembang menyesuaikan kualitas grafis sesuai target platform.</p>
-    <p>Teknologi ini membuat game 3D yang sebelumnya hanya mungkin dibuat oleh studio besar, kini dapat dikerjakan oleh tim kecil bahkan perorangan. Dengan sistem lighting yang lebih realistis dan dukungan untuk VR/AR, pengalaman bermain menjadi lebih imersif.</p>
-    <p>Komunitas pelajar semakin aktif dalam membuat proyek-proyek 3D sederhana, seperti game simulasi edukasi atau game petualangan mini, yang menggambarkan bagaimana teknologi ini membuka peluang baru dalam dunia pendidikan dan hiburan.</p>
+                <h2>Perkembangan Game 3D di Unity</h2>
+                <p>Di sisi lain, pengembangan game 3D juga mengalami revolusi. Unity 2025 menawarkan Unity 3D Render Pipeline yang lebih canggih, seperti Universal Render Pipeline (URP) dan High Definition Render Pipeline (HDRP), yang memungkinkan pengembang menyesuaikan kualitas grafis sesuai target platform.</p>
+                <p>Teknologi ini membuat game 3D yang sebelumnya hanya mungkin dibuat oleh studio besar, kini dapat dikerjakan oleh tim kecil bahkan perorangan. Dengan sistem lighting yang lebih realistis dan dukungan untuk VR/AR, pengalaman bermain menjadi lebih imersif.</p>
+                <p>Komunitas pelajar semakin aktif dalam membuat proyek-proyek 3D sederhana, seperti game simulasi edukasi atau game petualangan mini, yang menggambarkan bagaimana teknologi ini membuka peluang baru dalam dunia pendidikan dan hiburan.</p>
 
-    <h2>Integrasi Kecerdasan Buatan dan Procedural Content Generation</h2>
-    <p>Salah satu inovasi paling menarik di 2025 adalah integrasi kecerdasan buatan (AI) dalam Unity. Dengan tools seperti Unity ML-Agents, pengembang dapat membuat musuh game yang belajar dan beradaptasi, menjadikan gameplay lebih dinamis dan menantang.</p>
-    <p>Procedural Content Generation (PCG) juga menjadi andalan, memungkinkan pembuatan dunia game secara otomatis berdasarkan algoritma. Ini mengurangi waktu produksi dan membuka kemungkinan tak terbatas bagi ekspresi kreatif.</p>
+                <h2>Integrasi Kecerdasan Buatan dan Procedural Content Generation</h2>
+                <p>Salah satu inovasi paling menarik di 2025 adalah integrasi kecerdasan buatan (AI) dalam Unity. Dengan tools seperti Unity ML-Agents, pengembang dapat membuat musuh game yang belajar dan beradaptasi, menjadikan gameplay lebih dinamis dan menantang.</p>
+                <p>Procedural Content Generation (PCG) juga menjadi andalan, memungkinkan pembuatan dunia game secara otomatis berdasarkan algoritma. Ini mengurangi waktu produksi dan membuka kemungkinan tak terbatas bagi ekspresi kreatif.</p>
 
-    <h2>Tantangan dan Peluang di Dunia Pengembangan Game</h2>
-    <p>Seiring dengan kemudahan yang ditawarkan, pengembangan game di 2025 juga menghadapi tantangan. Persaingan yang ketat dan kebutuhan akan kreativitas serta inovasi terus-menerus menjadi beban tersendiri. Namun, di tengah tantangan itu, peluang juga terbuka lebar.</p>
-    <p>Kini, pelajar dan pengembang muda memiliki akses ke komunitas online, forum, dan sumber daya pendidikan yang luar biasa. Unity Learn dan berbagai platform edukasi menyediakan tutorial dan kursus gratis yang memungkinkan siapa pun untuk belajar langsung dari pengalaman nyata.</p>
+                <h2>Tantangan dan Peluang di Dunia Pengembangan Game</h2>
+                <p>Seiring dengan kemudahan yang ditawarkan, pengembangan game di 2025 juga menghadapi tantangan. Persaingan yang ketat dan kebutuhan akan kreativitas serta inovasi terus-menerus menjadi beban tersendiri. Namun, di tengah tantangan itu, peluang juga terbuka lebar.</p>
+                <p>Kini, pelajar dan pengembang muda memiliki akses ke komunitas online, forum, dan sumber daya pendidikan yang luar biasa. Unity Learn dan berbagai platform edukasi menyediakan tutorial dan kursus gratis yang memungkinkan siapa pun untuk belajar langsung dari pengalaman nyata.</p>
 
-    <h2>Platform dan Distribusi Game</h2>
-    <p>Unity tidak hanya kuat dalam pengembangan, tetapi juga dalam distribusi. Dengan dukungan multi-platform, game yang dibuat bisa diterbitkan ke berbagai platform seperti PC, mobile, konsol, dan bahkan web. Tren distribusi melalui platform digital seperti Steam, Itch.io, dan Google Play juga membuka peluang bagi pembuat game independen untuk menjangkau audiens global tanpa hambatan distribusi yang besar.</p>
+                <h2>Platform dan Distribusi Game</h2>
+                <p>Unity tidak hanya kuat dalam pengembangan, tetapi juga dalam distribusi. Dengan dukungan multi-platform, game yang dibuat bisa diterbitkan ke berbagai platform seperti PC, mobile, konsol, dan bahkan web. Tren distribusi melalui platform digital seperti Steam, Itch.io, dan Google Play juga membuka peluang bagi pembuat game independen untuk menjangkau audiens global tanpa hambatan distribusi yang besar.</p>
 
-    <h2>Kesimpulan</h2>
-    <p>Unity di tahun 2025 menawarkan kombinasi ideal antara kekuatan teknologi dan kemudahan penggunaan. Dengan semakin terbukanya akses ke alat-alat pengembangan game, semakin banyak pelajar dan pengembang muda yang bisa mewujudkan ide-ide kreatif mereka. Dunia game bukan lagi eksklusif untuk perusahaan besar, tetapi menjadi arena inovasi bagi generasi muda yang penuh semangat.</p>
-    <p>Kedepannya, dengan terus berkembangnya teknologi seperti AI, VR, dan cloud gaming, Unity akan tetap menjadi salah satu platform utama untuk mewujudkan imajinasi dalam bentuk game yang menakjubkan. Yang dibutuhkan hanyalah rasa ingin tahu dan semangat belajar.</p>
+                <h2>Kesimpulan</h2>
+                <p>Unity di tahun 2025 menawarkan kombinasi ideal antara kekuatan teknologi dan kemudahan penggunaan. Dengan semakin terbukanya akses ke alat-alat pengembangan game, semakin banyak pelajar dan pengembang muda yang bisa mewujudkan ide-ide kreatif mereka. Dunia game bukan lagi eksklusif untuk perusahaan besar, tetapi menjadi arena inovasi bagi generasi muda yang penuh semangat.</p>
+                <p>Kedepannya, dengan terus berkembangnya teknologi seperti AI, VR, dan cloud gaming, Unity akan tetap menjadi salah satu platform utama untuk mewujudkan imajinasi dalam bentuk game yang menakjubkan. Yang dibutuhkan hanyalah rasa ingin tahu dan semangat belajar.</p>
+                
+                <div id="read-also" class="navigation-section">
+                    <h4><i class="fas fa-book-open me-2"></i>Baca Juga Artikel Lainnya</h4>
+                    <div class="nav-buttons">
+                        <a href="article2.html" class="nav-btn read-also-btn">
+                            <i class="fas fa-arrow-right"></i> Arsitektur & Implementasi C# dalam Dunia Game
+                        </a>
+                        <a href="article3.html" class="nav-btn read-also-btn">
+                            <i class="fas fa-arrow-right"></i> Revolusi Web Development 2025
+                        </a>
+                        <a href="article4.html" class="nav-btn read-also-btn">
+                            <i class="fas fa-arrow-right"></i> Transformasi dan Disrupsi: Dunia Konten Kreatif di Era Digital 2025
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="article-footer">
+                <p>©2025 Fawwaz Anggita Yumna Qotrunnada. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
