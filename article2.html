@@ -46,4 +46,261 @@
             padding: 40px;
             text-align: center;
             position: relative;
-       
+        }
+        
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .article-content {
+            padding: 40px;
+        }
+        
+        h2 {
+            color: var(--accent-color);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+        
+        .navigation-section {
+            background: var(--primary-color);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .nav-btn {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, #495670, #2a3a50);
+            color: var(--text-color);
+        }
+        
+        .read-also-btn {
+            background: linear-gradient(135deg, var(--accent-color), #0a192f);
+            color: var(--primary-color);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tag {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .reading-time {
+            background: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+        
+        .article-footer {
+            background: var(--primary-color);
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .nav-btn.read-also-btn:hover, .nav-btn.back-btn:hover {
+            background: linear-gradient(135deg, #52d9b9, #0a192f) !important;
+        }
+        
+        @media (max-width: 768px) {
+            .article-content {
+                padding: 25px;
+            }
+            
+            .article-header {
+                padding: 30px 20px;
+            }
+            
+            .article-header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="article-container">
+            <div class="article-header">
+                <h1><i class="fas fa-code me-3"></i>Arsitektur & Implementasi C# dalam Dunia Game</h1>
+                <div class="article-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>8 September 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-user"></i>
+                        <span>Fawwaz AYQ</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>10-14 menit membaca</span>
+                    </div>
+                </div>
+                <div class="article-tags mt-3">
+                    <span class="tag">Pemrograman</span>
+                    <span class="tag">C#</span>
+                    <span class="tag">Unity</span>
+                    <span class="tag">Game Development</span>
+                </div>
+            </div>
+            
+            <div class="article-content">
+                <div class="navigation-section">
+                    <h4><i class="fas fa-compass me-2"></i>Navigasi Artikel</h4>
+                    <div class="nav-buttons">
+                        <a href="articles.html" class="nav-btn back-btn">
+                            <i class="fas fa-arrow-left"></i> Kembali ke Artikel
+                        </a>
+                        <a href="#read-also" class="nav-btn read-also-btn">
+                            <i class="fas fa-book-reader"></i> Baca Juga
+                        </a>
+                    </div>
+                </div>
+
+                <h2>Pendahuluan</h2>
+                <p>Di tengah pesatnya perkembangan teknologi game, kualitas kode menjadi aspek krusial yang menentukan keberhasilan suatu game. Salah satu bahasa pemrograman yang menjadi tulang punggung dalam dunia pengembangan game adalah C# (C-Sharp). Sejak Unity mengadopsinya sebagai bahasa utama, C# telah menjadi fondasi utama bagi banyak pengembang game di seluruh dunia, termasuk di Indonesia.</p>
+                <p>Tahun 2025 menjadi tahun penting bagi C# dalam konteks pengembangan game karena evolusi bahasa ini telah menyesuaikan diri dengan kebutuhan dunia game modern. Dari aspek performa hingga kemudahan penggunaan, C# terus berkembang seiring dengan perkembangan engine-engine seperti Unity.</p>
+                <p>Arsitektur yang baik dalam C# bukan hanya membuat game berjalan lancar, tetapi juga memudahkan proses pengembangan dan pemeliharaan. Dalam dunia game, di mana logika kompleks dan interaksi real-time diperlukan, struktur kode yang rapi dan efisien adalah kunci utama.</p>
+
+                <h2>Konsep Dasar Arsitektur dalam Pengembangan Game</h2>
+                <p>Arsitektur dalam pengembangan game merujuk pada bagaimana komponen-komponen kode disusun dan saling berinteraksi. Di Unity, pendekatan berbasis komponen sangat dominan. Setiap objek game (GameObject) dapat memiliki berbagai script C# yang menambahkan perilaku atau karakteristik.</p>
+                <p>Pola arsitektur seperti Model-View-Controller (MVC), Entity-Component-System (ECS), dan ScriptableObject menjadi kerangka utama dalam merancang struktur kode yang baik. Pola-pola ini membantu pengembang memisahkan logika game dari tampilan, membuat kode lebih modular dan mudah dipahami.</p>
+                <p>Contoh nyata adalah penggunaan ScriptableObject untuk menyimpan data game seperti statistik karakter, item, atau level. Ini memungkinkan pengembang menata data tanpa harus menyematkannya langsung ke dalam script, menjaga fleksibilitas dan keterbacaan kode.</p>
+
+                <h2>Implementasi C# dalam Sistem Game</h2>
+                <p>Dalam pengembangan game, C# digunakan untuk berbagai sistem penting seperti sistem pergerakan, AI, pertempuran, UI, dan jaringan. Unity menyediakan banyak API dan framework yang bekerja dengan C# untuk menyederhanakan proses ini.</p>
+                <p>Sebagai contoh, dalam sistem pergerakan karakter, developer menggunakan C# untuk menulis kode input dari pemain dan mengontrol fisika objek. Dengan pendekatan berbasis komponen, satu karakter bisa memiliki beberapa script berbeda untuk pergerakan, animasi, dan logika perilaku, semuanya berjalan secara bersamaan.</p>
+                <p>C# juga sangat kuat dalam pengolahan peristiwa (events) dan delegasi (delegates), yang cocok untuk sistem interaksi kompleks dalam game. Misalnya, ketika karakter mengambil item, sistem bisa memicu berbagai aksi seperti penambahan ke inventory, perubahan statistik, atau pemicu cutscene.</p>
+
+                <h2>Keunggulan C# dalam Unity</h2>
+                <p>C# menawarkan sejumlah keunggulan dalam konteks pengembangan game di Unity. Pertama, integrasi yang sangat baik antara bahasa dan engine memungkinkan pengembang untuk mengakses berbagai aspek Unity secara langsung. Kedua, dukungan terhadap paradigma pemrograman berorientasi objek (OOP) membuat kode lebih mudah dipahami dan dikembangkan.</p>
+                <p>Fitur-fitur modern C# seperti async/await, LINQ, dan nullable reference types memungkinkan pengembang menulis kode yang lebih aman dan efisien. Ini sangat penting dalam pengembangan game real-time di mana performa sangat krusial.</p>
+
+                <h2>Tantangan dan Solusi dalam Implementasi C#</h2>
+                <p>Meskipun C# sangat kuat, implementasinya dalam game juga menghadapi tantangan. Salah satunya adalah manajemen memori yang efisien, terutama dalam game yang membutuhkan frame rate tinggi. Penggunaan garbage collector dalam C# bisa menyebabkan lag jika tidak dikelola dengan baik.</p>
+                <p>Solusi seperti pooling objek dan penggunaan structs untuk data ringan membantu mengurangi overhead memori. Selain itu, Unity juga mulai mengadopsi Entity Component System (ECS) dan Burst Compiler untuk meningkatkan performa kode C#.</p>
+                <p>Tantangan lain adalah manajemen kode dalam proyek besar. Dengan semakin kompleksnya game, struktur kode harus dirancang dengan baik sejak awal untuk mencegah kerumitan di masa depan.</p>
+
+                <h2>Inovasi dan Tren Terbaru dalam C# untuk Game</h2>
+                <p>Di tahun 2025, beberapa tren baru dalam penggunaan C# untuk game mulai muncul. Pemanfaatan AI untuk membantu menulis dan menguji kode, serta penggunaan sistem visual scripting yang berjalan di atas C#, menjadi bagian dari evolusi pengembangan game.</p>
+                <p>Fitur-fitur baru dalam C# seperti records, pattern matching, dan source generators juga mulai dimanfaatkan oleh pengembang game untuk membuat kode yang lebih ringkas dan ekspresif. Ini membantu pengembang fokus lebih pada logika game daripada struktur kode yang rumit.</p>
+
+                <h2>Kesimpulan</h2>
+                <p>C# tetap menjadi pilihan utama dalam pengembangan game berkat fleksibilitas, performa, dan integrasi yang kuat dengan Unity. Arsitektur yang baik dalam C# menjadi penentu kualitas game dan pengalaman pengembang dalam proses pembuatan. Dengan terus berkembangnya fitur dan teknik baru, C# akan terus menjadi alat penting bagi para pelajar dan pengembang yang ingin menciptakan pengalaman bermain yang luar biasa.</p>
+                <p>Ke depan, dengan semakin banyaknya sumber daya dan komunitas yang mendukung, C# akan terus menjadi fondasi yang solid dalam dunia pengembangan game modern.</p>
+                
+                <div id="read-also" class="navigation-section">
+                    <h4><i class="fas fa-book-open me-2"></i>Baca Juga Artikel Lainnya</h4>
+                    <div class="nav-buttons">
+                        <a href="article1.html" class="nav-btn read-also-btn">
+                            <i class="fas fa-arrow-right"></i> Membangun Game 2D dan 3D dengan Unity
+                        </a>
+                        <a href="article3.html" class="nav-btn read-also-btn">
+                            <i class="fas fa-arrow-right"></i> Revolusi Web Development 2025
+                        </a>
+                        <a href="article4.html" class="nav-btn read-also-btn">
+                            <i class="fas fa-arrow-right"></i> Transformasi dan Disrupsi: Dunia Konten Kreatif di Era Digital 2025
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="article-footer">
+                <p>©2025 Fawwaz Anggita Yumna Qotrunnada. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
