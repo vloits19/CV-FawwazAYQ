@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sertifikat - Fawwaz AYQ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="Logo.png" type="image/x-icon" />
+    <style>
+        .certificate-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--text-color);
+        }
+        
+        .pdf-viewer-container {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 600px;
+            border: 1px solid var(--secondary-color);
+            border-radius: 8px;
+        }
+        
+        .certificate-title {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .certificate-info {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .close-pdf {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--text-color);
+            background: var(--secondary-color);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .close-pdf:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+        }
+        
+        .back-btn {
+            background: var(--accent-color) !important;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .back-btn:hover {
+            background: #52d9b9 !important;
+            transform: translateY(-3px);
+            text-decoration: none;
+            color: white !important;
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+        }
+        
+        .no-certificates {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+        }
+        
+        .certificate-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        
+        .certificate-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid var(--accent-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--text-color));
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            border-left: 4px solid var(--text-color);
+        }
+
+        .certificate-icon-large {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .certificate-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .certificate-icon {
+            font-size: 1.8rem;
+            margin-right: 12px;
+            color: var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .certificate-content {
+            flex-grow: 1;
+            min-width: 0; /* Allows flex item to shrink below content size */
+        }
+
+        .certificate-title {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1.3rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .certificate-info {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .certificate-date {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .certificate-date i {
+            margin-right: 8px;
+            color: var(--accent-color);
+        }
+
+        .certificate-description {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--secondary-color);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .certificate-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .certificate-detail {
+            background-color: rgba(100, 255, 218, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .certificate-detail p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .certificate-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .certificate-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .certificate-content {
+                text-align: center;
+            }
+
+            .certificate-badge {
+                position: static;
+                display: inline-block;
+                margin-top: 10px;
+            }
+            
+            .sidebar {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    <div class="parallax-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Fawwaz AYQ</a>
+            <div class="d-flex align-items-center">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#profile">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">Kemampuan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#experience">Proyek</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="stories.html">Cerita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="articles.html">Artikel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Sertifikat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5 mt-5">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 mb-4">
+                <div class="sidebar">
+                    <div class="text-center">
+                        <img src="Profile.jpg" alt="Profile Photo" class="profile-img glowing-border" id="profileImage">
+                        <h4>Fawwaz AYQ</h4>
+                        <p class="text-muted">Pelajar & Calon Game Developer</p>
+                    </div>
+
+                    <div class="contact-info mt-4">
+                        <h5 class="section-title">Tentang Sertifikat</h5>
+                        <p><i class="fas fa-info-circle"></i> Koleksi sertifikat yang telah saya peroleh</p>
+                        <p><i class="fas fa-folder"></i> Jumlah: <span id="certificate-count">0</span> sertifikat</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <h5 class="section-title">Detail</h5>
+                        <div class="certificate-detail">
+                            <p class="text-truncate"><i class="fas fa-file-pdf text-danger me-2"></i> Certificate_2025_20067.pdf</p>
+                            <p><i class="fas fa-calendar text-info me-2"></i> 10 November 2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="col-lg-9">
+                <div class="main-content">
+                    <h3 class="section-title">
+                        <i class="fas fa-certificate me-2"></i>Sertifikat
+                    </h3>
+                    <p class="text-muted">Berikut adalah koleksi sertifikat yang telah saya peroleh sejauh ini:</p>
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <a href="index.html" class="back-btn">
+                            <i class="fas fa-arrow-left me-2"></i>Kembali ke Beranda
+                        </a>
+                        <div class="text-end">
+                            <small class="text-muted">Klik pada sertifikat untuk melihat detail</small>
+                        </div>
+                    </div>
+
+                    <!-- Certificates List -->
+                    <div id="certificates-container">
+                        <!-- Certificates will be loaded here dynamically -->
+                        <div class="no-certificates">
+                            <div class="certificate-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <h5>Belum ada sertifikat</h5>
+                            <p class="text-muted">Sertifikat yang diupload akan muncul di sini secara otomatis</p>
+                        </div>
+                    </div>
+
+                    <!-- PDF Viewer Container -->
+                    <div id="pdf-viewer-container" class="pdf-viewer-container">
+                        <button id="close-pdf" class="close-pdf">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <iframe id="pdf-viewer" class="pdf-viewer" src="" type="application/pdf"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center">
+        <p class="mb-0">©2025 Fawwaz Anggita Yumna Qotrunnada. All rights reserved.</p>
+    </footer>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <!-- Custom Scripts -->
+    <script src="script.js"></script>
+    <script src="certificates.js"></script>
+    
+    <script>
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load certificates configuration from JSON file
+            loadCertificatesConfig();
+            
+            // Add event listener to close button
+            document.getElementById('close-pdf').addEventListener('click', closePdfViewer);
+            
+            // Initialize particles if available
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: { value: 80, density: { enable: true, value_area: 800 } },
+                        color: { value: "#64ffda" },
+                        shape: { 
+                            type: "circle",
+                            stroke: { width: 0, color: "#000000" }
+                        },
+                        opacity: {
+                            value: 0.5,
+                            random: true,
+                            anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+                        },
+                        size: {
+                            value: 3,
+                            random: true,
+                            anim: { enable: true, speed: 2, size_min: 0.3, sync: false }
+                        },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: "#64ffda",
+                            opacity: 0.4,
+                            width: 1,
+                            shadow: {
+                                enable: true,
+                                blur: 5,
+                                color: "#64ffda"
+                            }
+                        },
+                        move: {
+                            enable: true,
+                            speed: 1.5,
+                            direction: "none",
+                            random: true,
+                            straight: false,
+                            out_mode: "out",
+                            bounce: false,
+                            attract: {
+                                enable: false,
+                                rotateX: 600,
+                                rotateY: 1200
+                            }
+                        }
+                    },
+                    interactivity: {
+                        detect_on: "canvas",
+                        events: {
+                            onhover: {
+                                enable: true,
+                                mode: "bubble"
+                            },
+                            onclick: {
+                                enable: true,
+                                mode: "push"
+                            },
+                            resize: true
+                        },
+                        modes: {
+                            grab: {
+                                distance: 140,
+                                line_linked: { opacity: 1 }
+                            },
+                            bubble: {
+                                distance: 250,
+                                size: 5,
+                                duration: 2,
+                                opacity: 1,
+                                speed: 3
+                            },
+                            repulse: {
+                                distance: 100,
+                                duration: 0.4
+                            },
+                            push: {
+                                particles_nb: 4
+                            },
+                            remove: {
+                                particles_nb: 2
+                            }
+                        }
+                    },
+                    retina_detect: true
+                });
+            }
+        });
+    </script>
+</body>
+</html>
